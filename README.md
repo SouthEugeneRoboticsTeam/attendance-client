@@ -2,6 +2,10 @@
 
 A client interface for SERT's attendance.
 
+# Screenshots
+
+![Screenshot/Mainpage](/screenshots/mainpage.png?raw=true)
+
 # Using
 
 You can [download the latest release](https://github.com/Scoutomic/Attendance-Client/releases) for your operating system or build it yourself (see below).
