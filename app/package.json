@@ -1,8 +1,8 @@
 {
-  "name": "scoutomic",
-  "productName": "Scoutomic",
-  "description": "An FRC scouting app to make scouting easier and more organized.",
-  "version": "0.3.0",
+  "name": "attendance",
+  "productName": "Attendance",
+  "description": "A client interface for SERT's attendance",
+  "version": "0.0.1",
   "author": "Andrew Dassonville",
   "license": "GNU",
   "main": "background.js",
@@ -13,7 +13,7 @@
   },
   "osx": {
     "build": "1",
-    "identifier": "org.sert2521.scoutomic",
+    "identifier": "org.sert2521.attendance",
     "LSApplicationCategoryType": "public.app-category.productivity",
     "//codeSignIdentitiy": {
       "dmg": "Developer ID Application: Company Name (APPIDENTITY)",

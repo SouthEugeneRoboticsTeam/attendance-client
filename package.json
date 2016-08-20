@@ -27,7 +27,6 @@
     "install-native": "node ./tasks/install_native_module"
   },
   "dependencies": {
-    "bcrypt": "^0.8.7",
     "jquery": "^2.2.3",
     "shasum": "^1.0.2"
   }
