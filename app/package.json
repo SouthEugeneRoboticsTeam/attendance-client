@@ -1,0 +1,24 @@
+{
+  "name": "scoutomic",
+  "productName": "Scoutomic",
+  "description": "An FRC scouting app to make scouting easier and more organized.",
+  "version": "0.3.0",
+  "author": "Andrew Dassonville",
+  "license": "GNU",
+  "main": "background.js",
+  "dependencies": {
+    "fs-jetpack": "^0.7.0",
+    "jquery": "^2.2.3",
+    "nedb": "^1.8.0"
+  },
+  "osx": {
+    "build": "1",
+    "identifier": "org.sert2521.scoutomic",
+    "LSApplicationCategoryType": "public.app-category.productivity",
+    "//codeSignIdentitiy": {
+      "dmg": "Developer ID Application: Company Name (APPIDENTITY)",
+      "MAS": "3rd Party Mac Developer Application: Company Name (APPIDENTITY)",
+      "MASInstaller": "3rd Party Mac Developer Installer: Company Name (APPIDENTITY)"
+    }
+  }
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Scoutomic</title>
+
+	<link href="components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="components/flat-ui/dist/css/flat-ui.min.css" rel="stylesheet" type="text/css">
+	<link href="components/sweetalert2/css/sweetalert2.min.css" rel="stylesheet" type="text/css">
+
+	<link href="components/main.css" rel="stylesheet" type="text/css">
+	<link href="components/app.css" rel="stylesheet" type="text/css">
+
+	<script src="helpers/context_menu.js"></script>
+	<script src="helpers/external_links.js"></script>
+
+	<script src="app.js"></script>
+</head>
+
+<body>
+	<div id="title-bar">
+		<div id="title">Attendance</div>
+		<div id="title-bar-btns">
+			<button id="min-btn">-</button>
+			<button id="max-btn">+</button>
+			<button id="close-btn">x</button>
+		</div>
+	</div>
+	<div id="content">
+		<div class="headline">
+			<h1 class="title">
+				<div class="logo"></div>
+				ATTENDANCE
+				<small>SERT's Attendance Application</small>
+			</h1>
+		</div>
+		<div class="container">
+			<div class="column-center">
+				<div>
+					<input id="student-id" placeholder="Student ID"></input>
+				</div>
+				<button id="sign-in" class="btn btn-primary sign-in">Sign In</button>
+				<button id="sign-out" class="btn btn-danger sign-out">Sign Out</button>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		window.$ = window.jQuery = require('jquery');
+	</script>
+
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="components/flat-ui/dist/js/flat-ui.min.js"></script>
+	<script src="components/flat-ui/js/application.js"></script>
+	<script src="components/sweetalert2/js/sweetalert2.min.js"></script>
+
+	<script src="components/management.js"></script>
+	<script src="components/main.js"></script>
+</body>
+
+</html>
