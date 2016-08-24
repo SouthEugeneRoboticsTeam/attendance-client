@@ -52,6 +52,33 @@ function checkState(callback) {
 	});
 }
 
+function checkHours(callback){
+	var studentid = $('#student-id').val();
+	$('#student-id').val('');
+
+	var query = {
+		student: shasum(studentid)
+	}
+
+	users.findOne(query, function(err, doc) {
+		if (err) {
+			callback(err);
+		} else {
+			var attendance = doc.attendance;
+
+			if (attendance.length) {
+				var totalTime = 0;
+				attendance.forEach(function (session){
+					if (session.signout){
+						totalTime += session.signout - session.signin;
+					}
+				});
+				callback(null, totalTime)
+			}
+		}
+	});
+}
+
 function create(name, callback) {
 	var studentid = $('#student-id').val();
 
