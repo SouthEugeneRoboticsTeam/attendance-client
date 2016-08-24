@@ -29,18 +29,21 @@
 		}
 	});
 
-	$("#student-id").change(function() {
+	$("#student-id").on("input", function() {
 		check(function(exists) {
 			if (exists) {
 				checkState(function(state) {
 					if (state) {
 						$("#submit").text("Sign In");
+						$("#submit").attr("class", "btn sign-in btn-success");
 					} else {
 						$("#submit").text("Sign Out");
+						$("#submit").attr("class", "btn sign-in btn-danger");
 					}
 				});
 			} else {
 				$("#submit").text("New User");
+				$("#submit").attr("class", "btn sign-in btn-info");
 			}
 		});
 
@@ -61,6 +64,9 @@
 									text: name + ', you have successfully signed in!',
 									timer: 2000
 								});
+
+								$("#submit").text("Sign In/Out");
+								$("#submit").attr("class", "btn sign-in btn-primary");
 							}
 						});
 					} else {
@@ -74,6 +80,9 @@
 									text: name + ', you have successfully signed out!',
 									timer: 2000
 								});
+
+								$("#submit").text("Sign In/Out");
+								$("#submit").attr("class", "btn sign-in btn-primary");
 							}
 						});
 					}
@@ -109,6 +118,9 @@
 										text: name + ', you have successfully signed in!',
 										timer: 2000
 									});
+
+									$("#submit").text("Sign In/Out");
+									$("#submit").attr("class", "btn sign-in btn-primary");
 								}
 							});
 						}
