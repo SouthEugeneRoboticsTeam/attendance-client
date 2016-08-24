@@ -32,6 +32,26 @@ function check(callback) {
 	});
 }
 
+function checkState(callback) {
+	var studentid = $('#student-id').val();
+
+	var query = {
+		student: shasum(studentid)
+	}
+
+	users.findOne(query, function(err, doc) {
+		var attendance = doc.attendance;
+
+		if (attendance.length) {
+			if (attendance[attendance.length - 1].signout) {
+				callback(true);
+			} else {
+				callback(false);
+			}
+		}
+	});
+}
+
 function create(name, callback) {
 	var studentid = $('#student-id').val();
 

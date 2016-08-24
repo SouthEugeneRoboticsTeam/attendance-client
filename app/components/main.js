@@ -29,18 +29,52 @@
 		}
 	});
 
-	$("#sign-in").click(function() {
+	$("#student-id").change(function() {
 		check(function(exists) {
 			if (exists) {
-				signIn(function(err, name) {
-					if (err) {
-						console.log(err);
+				checkState(function(state) {
+					if (state) {
+						$("#submit").text("Sign In");
 					} else {
-						swal({
-							type: 'success',
-							title: 'Signed In',
-							text: name + ', you have successfully signed in!',
-							timer: 2000
+						$("#submit").text("Sign Out");
+					}
+				});
+			} else {
+				$("#submit").text("New User");
+			}
+		});
+
+	});
+
+	$("#submit").click(function() {
+		check(function(exists) {
+			if (exists) {
+				checkState(function(state) {
+					if (state) { //if state is true, then they have signed out
+						signIn(function(err, name) {
+							if (err) {
+								console.log(err);
+							} else {
+								swal({
+									type: 'success',
+									title: 'Signed In',
+									text: name + ', you have successfully signed in!',
+									timer: 2000
+								});
+							}
+						});
+					} else {
+						signOut(function(err, name) {
+							if (err) {
+								console.log(err);
+							} else {
+								swal({
+									type: 'warning',
+									title: 'Signed Out',
+									text: name + ', you have successfully signed out!',
+									timer: 2000
+								});
+							}
 						});
 					}
 				});
@@ -79,21 +113,6 @@
 							});
 						}
 					});
-				});
-			}
-		});
-	});
-
-	$("#sign-out").click(function() {
-		signOut(function(err, name) {
-			if (err) {
-				console.log(err);
-			} else {
-				swal({
-					type: 'warning',
-					title: 'Signed Out',
-					text: name + ', you have successfully signed out!',
-					timer: 2000
 				});
 			}
 		});
