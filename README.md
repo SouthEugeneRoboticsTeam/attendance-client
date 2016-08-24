@@ -17,6 +17,6 @@ To build Attendance-Client from the source code, you'll need to have the LTS ver
 ```bash
 $ git clone https://github.com/Scoutomic/Attendance-Client
 $ cd Attendance-Client
-$ npm run setup
+$ npm install
 $ npm start
 ```
