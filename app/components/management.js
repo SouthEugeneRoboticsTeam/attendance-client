@@ -16,9 +16,7 @@ var appDir = jetpack.cwd(app$1.getAppPath());
 var manifest = appDir.read('package.json', 'json');
 var env = manifest.env;
 
-function check(callback) {
-	var studentid = $('#student-id').val();
-
+function checkExists(studentid, callback) {
 	var query = {
 		student: shasum(studentid)
 	};
@@ -32,9 +30,7 @@ function check(callback) {
 	});
 }
 
-function checkState(callback) {
-	var studentid = $('#student-id').val();
-
+function checkState(studentid, callback) {
 	var query = {
 		student: shasum(studentid)
 	}
@@ -52,10 +48,7 @@ function checkState(callback) {
 	});
 }
 
-function checkHours(callback){
-	var studentid = $('#student-id').val();
-	$('#student-id').val('');
-
+function checkHours(studentid, callback){
 	var query = {
 		student: shasum(studentid)
 	}
@@ -79,9 +72,7 @@ function checkHours(callback){
 	});
 }
 
-function create(name, callback) {
-	var studentid = $('#student-id').val();
-
+function create(studentid, name, callback) {
 	var data = {
 		student: shasum(studentid),
 		name: name,
@@ -97,10 +88,7 @@ function create(name, callback) {
 	});
 }
 
-function signIn(callback) {
-	var studentid = $('#student-id').val();
-	$('#student-id').val('');
-
+function signIn(studentid, callback) {
 	var d = new Date();
 
 	var query = {
@@ -127,10 +115,7 @@ function signIn(callback) {
 	});
 }
 
-function signOut(callback) {
-	var studentid = $('#student-id').val();
-	$('#student-id').val('');
-
+function signOut(studentid, callback) {
 	var d = new Date();
 
 	var query = {

@@ -30,31 +30,38 @@
 	});
 
 	$("#student-id").on("input", function() {
-		check(function(exists) {
-			if (exists) {
-				checkState(function(state) {
-					if (state) {
-						$("#submit").text("Sign In");
-						$("#submit").attr("class", "btn sign-in btn-success");
-					} else {
-						$("#submit").text("Sign Out");
-						$("#submit").attr("class", "btn sign-in btn-danger");
-					}
-				});
-			} else {
-				$("#submit").text("New User");
-				$("#submit").attr("class", "btn sign-in btn-info");
-			}
-		});
+		var studentid = $("#student-id").val();
 
+		if (studentid) {
+			checkExists(studentid, function(exists) {
+				if (exists) {
+					checkState(studentid, function(state) {
+						if (state) {
+							$("#submit").text("Sign In");
+							$("#submit").attr("class", "btn sign-in btn-success");
+						} else {
+							$("#submit").text("Sign Out");
+							$("#submit").attr("class", "btn sign-in btn-danger");
+						}
+					});
+				} else {
+					$("#submit").text("New User");
+					$("#submit").attr("class", "btn sign-in btn-info");
+				}
+			});
+		} else {
+			clearSubmit();
+		}
 	});
 
 	$("#submit").click(function() {
-		check(function(exists) {
+		var studentid = $("#student-id").val();
+
+		checkExists(studentid, function(exists) {
 			if (exists) {
-				checkState(function(state) {
-					if (state) { //if state is true, then they have signed out
-						signIn(function(err, name) {
+				checkState(studentid, function(state) {
+					if (state) {
+						signIn(studentid, function(err, name) {
 							if (err) {
 								console.log(err);
 							} else {
@@ -65,12 +72,11 @@
 									timer: 2000
 								});
 
-								$("#submit").text("Sign In/Out");
-								$("#submit").attr("class", "btn sign-in btn-primary");
+								clearSubmit();
 							}
 						});
 					} else {
-						signOut(function(err, name) {
+						signOut(studentid, function(err, name) {
 							if (err) {
 								console.log(err);
 							} else {
@@ -81,8 +87,7 @@
 									timer: 2000
 								});
 
-								$("#submit").text("Sign In/Out");
-								$("#submit").attr("class", "btn sign-in btn-primary");
+								clearSubmit();
 							}
 						});
 					}
@@ -104,11 +109,11 @@
 						});
 					}
 				}).then(function(result) {
-					create(result, function(err) {
+					create(studentid, result, function(err) {
 						if (err) {
 							console.log(err);
 						} else {
-							signIn(function(err, name) {
+							signIn(studentid, function(err, name) {
 								if (err) {
 									console.log(err);
 								} else {
@@ -119,8 +124,7 @@
 										timer: 2000
 									});
 
-									$("#submit").text("Sign In/Out");
-									$("#submit").attr("class", "btn sign-in btn-primary");
+									clearSubmit();
 								}
 							});
 						}
@@ -131,70 +135,51 @@
 	});
 
 	$("#check-hours").click(function() {
-		check(function(exists) {
-			if (exists) {
-				checkState(function(state) {
-					//if (state) {
-						checkHours(function (err, totalTime){
-							if (err){
-								console.log(err);
-							} else {
-								var sec_num = parseInt(totalTime, 10);
-								var hours = Math.floor(sec_num / 3600);
-								var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-								var seconds = sec_num - (hours * 3600) - (minutes * 60);
+		var studentid = $("#student-id").val();
 
-								if (hours < 10) {hours   = "0"+hours;}
-								if (minutes < 10) {minutes = "0"+minutes;}
-								if (seconds < 10) {seconds = "0"+seconds;}
-								//seconds for testing, remove in final version
-								swal({
-									type: 'success',
-									title: 'Records Found',
-									text: 'You have spent ' + hours + ':' + minutes + ':' + seconds + ' in the shop.',
-									timer: 5000
-								});
-							}
-						});
-					//}
+		checkExists(studentid, function(exists) {
+			if (exists) {
+				checkState(studentid, function(state) {
+					checkHours(studentid, function (err, totalTime){
+						if (err){
+							console.log(err);
+						} else {
+							var sec_num = parseInt(totalTime);
+							var hours = Math.floor(sec_num / 3600);
+							var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+							var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+							if (hours < 10) {hours   = "0"+hours;}
+							if (minutes < 10) {minutes = "0"+minutes;}
+							if (seconds < 10) {seconds = "0"+seconds;}
+							//seconds for testing, remove in final version
+							swal({
+								type: 'info',
+								//title: 'Records Found',
+								text: 'You have spent ' + hours + ':' + minutes + ':' + seconds + ' in the shop.',
+								timer: 5000
+							});
+
+							clearSubmit();
+						}
+					});
 				});
 			} else {
 				swal({
 					type: 'warning',
-					title: 'Create Account',
-					text: 'Enter your full name.',
-					input: 'text',
-					showCancelButton: true,
-					inputValidator: function(value) {
-						return new Promise(function(resolve, reject) {
-							if (value && isNaN(value)) {
-								resolve();
-							} else {
-								reject('Please enter your name!');
-							}
-						});
-					}
-				}).then(function(result) {
-					create(result, function(err) {
-						if (err) {
-							console.log(err);
-						} else {
-							signIn(function(err, name) {
-								if (err) {
-									console.log(err);
-								} else {
-									swal({
-										type: 'success',
-										title: 'Signed In',
-										text: name + ', you have successfully signed in!',
-										timer: 2000
-									});
-								}
-							});
-						}
-					});
+					title: 'Account Not Found',
+					text: 'Please enter a valid account!'
 				});
+
+				clearSubmit();
 			}
 		});
 	});
+
+	function clearSubmit() {
+		$('#student-id').val('');
+
+		$("#submit").text("Sign In/Out");
+		$("#submit").attr("class", "btn sign-in btn-primary");
+	}
 })();

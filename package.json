@@ -20,7 +20,7 @@
     "rcedit": "^0.5.0"
   },
   "scripts": {
-    "setup": "npm install && cd app && npm install",
+    "postinstall": "cd app && npm install",
     "build": "gulp build",
     "release": "gulp release --env=production",
     "start": "gulp start",
