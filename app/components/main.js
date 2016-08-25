@@ -44,7 +44,6 @@
 							$("#submit").text("Sign Out");
 							$("#submit").attr("class", "btn sign-in btn-danger");
 							$("#student-id-div").attr("class", "form-group has-error");
-
 						}
 					});
 				} else {
@@ -185,5 +184,6 @@
 
 		$("#submit").text("Sign In/Out");
 		$("#submit").attr("class", "btn sign-in btn-primary");
+		$("#student-id-div").attr("class", "form-group");
 	}
 })();
