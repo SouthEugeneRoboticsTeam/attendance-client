@@ -39,14 +39,18 @@
 						if (state) {
 							$("#submit").text("Sign In");
 							$("#submit").attr("class", "btn sign-in btn-success");
+							$("#student-id-div").attr("class", "form-group has-success");
 						} else {
 							$("#submit").text("Sign Out");
 							$("#submit").attr("class", "btn sign-in btn-danger");
+							$("#student-id-div").attr("class", "form-group has-error");
+
 						}
 					});
 				} else {
 					$("#submit").text("New User");
 					$("#submit").attr("class", "btn sign-in btn-info");
+					$("#student-id-div").attr("class", "form-group");
 				}
 			});
 		} else {
