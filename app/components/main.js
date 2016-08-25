@@ -9,7 +9,6 @@
 
 		$("#min-btn").click(function() {
 			var window = remote.getCurrentWindow();
-			console.log("Minimized!");
 			window.minimize();
 		});
 
