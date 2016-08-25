@@ -7,18 +7,19 @@
 	function initTitleBar() {
 		$("#title-bar").show();
 
-		$("min-btn").click(function() {
-			var window = BrowserWindow.getFocusedWindow();
+		$("#min-btn").click(function() {
+			var window = remote.getCurrentWindow();
+			console.log("Minimized!");
 			window.minimize();
 		});
 
-		$("max-btn").click(function() {
-			var window = BrowserWindow.getFocusedWindow();
+		$("#max-btn").click(function() {
+			var window = remote.getCurrentWindow();
 			window.maximize();
 		});
 
-		$("close-btn").click(function() {
-			var window = BrowserWindow.getFocusedWindow();
+		$("#close-btn").click(function() {
+			var window = remote.getCurrentWindow();
 			window.close();
 		});
 	}
