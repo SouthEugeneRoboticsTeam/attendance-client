@@ -5,7 +5,8 @@
 	var BrowserWindow = electron.BrowserWindow;
 
 	function initTitleBar() {
-		$("#title-bar").show();
+		$("#title-bar-btns").show();
+		$("#title").show();
 
 		$("#min-btn").click(function() {
 			var window = remote.getCurrentWindow();
