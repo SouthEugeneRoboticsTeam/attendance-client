@@ -1,5 +1,4 @@
 var Datastore = require('nedb');
-var shasum = require('shasum');
 
 var jetpack = _interopDefault(require('fs-jetpack'));
 
@@ -18,7 +17,7 @@ var env = manifest.env;
 
 function checkExists(studentid, callback) {
 	var query = {
-		student: shasum(studentid)
+		student: studentid
 	};
 
 	users.findOne(query, function(err, doc) {
@@ -32,7 +31,7 @@ function checkExists(studentid, callback) {
 
 function checkState(studentid, callback) {
 	var query = {
-		student: shasum(studentid)
+		student: studentid
 	}
 
 	users.findOne(query, function(err, doc) {
@@ -50,7 +49,7 @@ function checkState(studentid, callback) {
 
 function checkHours(studentid, callback){
 	var query = {
-		student: shasum(studentid)
+		student: studentid
 	}
 
 	users.findOne(query, function(err, doc) {
@@ -74,7 +73,7 @@ function checkHours(studentid, callback){
 
 function create(studentid, name, callback) {
 	var data = {
-		student: shasum(studentid),
+		student: studentid,
 		name: name,
 		attendance: []
 	};
@@ -92,7 +91,7 @@ function signIn(studentid, callback) {
 	var d = new Date();
 
 	var query = {
-		student: shasum(studentid)
+		student: studentid
 	};
 
 	var data = {
@@ -119,7 +118,7 @@ function signOut(studentid, callback) {
 	var d = new Date();
 
 	var query = {
-		student: shasum(studentid)
+		student: studentid
 	};
 
 	users.findOne(query, function(err, doc) {
