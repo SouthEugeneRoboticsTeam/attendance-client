@@ -21,37 +21,38 @@ var paths = {
     copyFromAppDir: [
         './node_modules/**',
         './helpers/**',
-        './components/**',
-        './scouting/**',
+        './assets/**',
+        './pages/**',
         './**/*.html',
         './**/*.+(jpg|png|svg)'
-    ],
+    ]
 }
 
 // -------------------------------------
 // Tasks
 // -------------------------------------
 
-gulp.task('clean', function (callback) {
+var cleanTask = function() {
     return destDir.dirAsync('.', { empty: true });
-});
+};
 
+gulp.task('clean', cleanTask);
 
 var copyTask = function () {
     return projectDir.copyAsync('app', destDir.path(), {
-            overwrite: true,
-            matching: paths.copyFromAppDir
-        });
+        overwrite: true,
+        matching: paths.copyFromAppDir
+    });
 };
+
 gulp.task('copy', ['clean'], copyTask);
 gulp.task('copy-watch', copyTask);
 
-
 var bundleApplication = function () {
     return Q.all([
-            bundle(srcDir.path('background.js'), destDir.path('background.js')),
-            bundle(srcDir.path('app.js'), destDir.path('app.js')),
-        ]);
+        bundle(srcDir.path('background.js'), destDir.path('background.js')),
+        bundle(srcDir.path('app.js'), destDir.path('app.js')),
+    ]);
 };
 
 var bundleSpecs = function () {
@@ -64,21 +65,12 @@ var bundleTask = function () {
     if (utils.getEnvName() === 'test') {
         return bundleSpecs();
     }
+
     return bundleApplication();
 };
+
 gulp.task('bundle', ['clean'], bundleTask);
 gulp.task('bundle-watch', bundleTask);
-
-
-var lessTask = function () {
-    return gulp.src('app/stylesheets/main.less')
-        .pipe(plumber())
-        .pipe(less())
-        .pipe(gulp.dest(destDir.path('stylesheets')));
-};
-gulp.task('less', ['clean'], lessTask);
-gulp.task('less-watch', lessTask);
-
 
 gulp.task('finalize', ['clean'], function () {
     var manifest = srcDir.read('package.json', 'json');
@@ -97,8 +89,7 @@ gulp.task('finalize', ['clean'], function () {
     }
 
     // Copy environment variables to package.json file for easy use
-    // in the running application. This is not official way of doing
-    // things, but also isn't prohibited ;)
+    // in the running application.
     manifest.env = projectDir.read('config/env_' + utils.getEnvName() + '.json', 'json');
 
     destDir.write('package.json', manifest);
@@ -109,13 +100,11 @@ gulp.task('watch', function () {
     watch('app/**/*.js', batch(function (events, done) {
         gulp.start('bundle-watch', done);
     }));
+
     watch(paths.copyFromAppDir, { cwd: 'app' }, batch(function (events, done) {
         gulp.start('copy-watch', done);
-    }));
-    watch('app/**/*.less', batch(function (events, done) {
-        gulp.start('less-watch', done);
     }));
 });
 
 
-gulp.task('build', ['bundle', 'less', 'copy', 'finalize']);
+gulp.task('build', ['bundle', 'copy', 'finalize']);

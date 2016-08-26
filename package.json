@@ -25,9 +25,5 @@
     "release": "gulp release --env=production",
     "start": "gulp start",
     "install-native": "node ./tasks/install_native_module"
-  },
-  "dependencies": {
-    "jquery": "^2.2.3",
-    "shasum": "^1.0.2"
   }
 }

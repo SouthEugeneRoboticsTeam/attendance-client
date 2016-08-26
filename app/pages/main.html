@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Scoutomic</title>
+
+	<link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="../node_modules/designmodo-flat-ui/dist/css/flat-ui.min.css" rel="stylesheet" type="text/css">
+	<link href="../node_modules/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" type="text/css">
+
+	<link href="../assets/css/app.css" rel="stylesheet" type="text/css">
+	<link href="../assets/css/main.css" rel="stylesheet" type="text/css">
+
+	<script src="../helpers/context_menu.js"></script>
+	<script src="../helpers/external_links.js"></script>
+
+	<script src="../app.js"></script>
+</head>
+
+<body>
+	<div id="title-bar">
+		<div id="title">Attendance</div>
+		<div id="title-bar-btns">
+			<button id="min-btn">-</button>
+			<button id="max-btn">+</button>
+			<button id="close-btn">x</button>
+		</div>
+	</div>
+	<div id="content">
+		<div class="headline">
+			<h1 class="title">
+				<div class="logo"></div>
+				ATTENDANCE
+				<small>SERT's Attendance Application</small>
+			</h1>
+		</div>
+		<div class="container">
+			<div class="column-center">
+				<div id="student-id-div" class="form-group">
+					<input id="student-id" class="form-control" placeholder="Student ID"></input>
+				</div>
+				<button id="submit" class="btn sign-in btn-primary">Sign In/Out</button>
+				<button id="check-hours" class="btn check-hours btn-primary">Check Hours</button>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		window.$ = window.jQuery = require('jquery');
+	</script>
+
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="../node_modules/designmodo-flat-ui/dist/js/flat-ui.min.js"></script>
+	<script src="../node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+
+	<script src="../assets/js/main.js"></script>
+	<script src="../assets/js/management.js"></script>
+</body>
+
+</html>

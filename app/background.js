@@ -33,7 +33,7 @@ app.on('ready', function () {
 		frame: yosemite ? true : false
 	});
 
-	mainWindow.loadURL('file://' + __dirname + '/main.html');
+	mainWindow.loadURL('file://' + __dirname + '/pages/main.html');
 
 	mainWindow.webContents.on('did-finish-load', function() {
 		mainWindow.show();

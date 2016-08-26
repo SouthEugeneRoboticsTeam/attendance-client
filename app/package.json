@@ -4,12 +4,15 @@
   "description": "A client interface for SERT's attendance",
   "version": "0.0.1",
   "author": "Andrew Dassonville",
-  "license": "GNU",
+  "license": "GPL-3.0",
   "main": "background.js",
   "dependencies": {
+    "bootstrap": "^3.3.7",
+    "designmodo-flat-ui": "^2.3.0",
     "fs-jetpack": "^0.7.0",
     "jquery": "^2.2.3",
-    "nedb": "^1.8.0"
+    "nedb": "^1.8.0",
+    "sweetalert2": "^4.1.9"
   },
   "osx": {
     "build": "1",
