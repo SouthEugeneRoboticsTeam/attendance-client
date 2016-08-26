@@ -1,7 +1,8 @@
 (function () {
 	var electron = require('electron');
-	var remote = electron.remote;
 	var os = require('os');
+
+	var remote = electron.remote;
 	var BrowserWindow = electron.BrowserWindow;
 
 	function initTitleBar() {
