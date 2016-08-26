@@ -1,7 +1,6 @@
-# Contributing to Scoutomic
+# Contributing to Attendance-Client
 
-Thanks for your interest in making Scoutomic better! I would appreciate it if you read over this document quickly
-before you submit your issue or pull request. It'll make things go much smoother.
+Thanks for your interest in making the Attendance-Client better! I would appreciate it if you read over this document quickly before you submit your issue or pull request. It'll make things go much smoother.
 
 # Issues
 
@@ -25,7 +24,7 @@ Submitting a pull request? Great! Thanks for contributing your time and code! Pl
 	- camelCase for variables and functions
 	- Opening braces on the same line as the if/for/while statement
 	- etc.
-- Please use the present-tense, imperative-style for commit messages (e.g. "Add feature" instead of "Added feature")
+- Please use the present-tense, imperative-style for commit messages (e.g. "Add feature" instead of "Added feature"). Capitalize only the first letter of the message (except for proper nouns) and do not use punctuation at the end of your message.
 - Please avoid breaking changes. If you make a breaking change that can be done in a backwards-compatible manner, I won't accept it.
 - Please don't increment the version number in `package.json`. I'll do that myself when I publish a release.
 - Please include a brief description of your change in the pull request if it's not immediately apparent from the code.
