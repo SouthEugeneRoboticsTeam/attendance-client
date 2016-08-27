@@ -1,8 +1,15 @@
 var Datastore = require('nedb');
+var async = require('async');
 
 var jetpack = _interopDefault(require('fs-jetpack'));
 
-var users = new Datastore({ filename: __dirname + '/datastore/users.db', autoload: true });
+var db = {};
+
+db.users = new Datastore(__dirname + '/../datastore/users.db');
+db.attendance = new Datastore(__dirname + '/../datastore/attendance.db');
+
+db.users.loadDatabase();
+db.attendance.loadDatabase();
 
 var app$1;
 if (process.type === 'renderer') {
@@ -20,7 +27,7 @@ function checkExists(studentid, callback) {
 		student: studentid
 	};
 
-	users.findOne(query, function(err, doc) {
+	db.users.findOne(query, function(err, doc) {
 		if (err || !doc) {
 			callback(false);
 		} else {
@@ -34,11 +41,11 @@ function checkState(studentid, callback) {
 		student: studentid
 	}
 
-	users.findOne(query, function(err, doc) {
+	db.users.findOne(query, function(err, doc) {
 		var attendance = doc.attendance;
 
 		if (attendance.length) {
-			if (attendance[attendance.length - 1].signout) {
+			if (attendance[attendance.length - 1].out) {
 				callback(true);
 			} else {
 				callback(false);
@@ -52,7 +59,7 @@ function checkHours(studentid, callback){
 		student: studentid
 	}
 
-	users.findOne(query, function(err, doc) {
+	db.users.findOne(query, function(err, doc) {
 		if (err) {
 			callback(err);
 		} else {
@@ -60,11 +67,12 @@ function checkHours(studentid, callback){
 
 			if (attendance.length) {
 				var totalTime = 0;
-				attendance.forEach(function (session){
-					if (session.signout){
-						totalTime += session.signout - session.signin;
+				attendance.forEach(function(session){
+					if (session.out) {
+						totalTime += session.out - session.in;
 					}
 				});
+
 				callback(null, totalTime)
 			}
 		}
@@ -78,7 +86,7 @@ function create(studentid, name, callback) {
 		attendance: []
 	};
 
-	users.insert(data, function(err) {
+	db.users.insert(data, function(err) {
 		if (err) {
 			callback(err);
 		} else {
@@ -89,59 +97,122 @@ function create(studentid, name, callback) {
 
 function signIn(studentid, callback) {
 	var d = new Date();
+	var time = d.getTime();
 
 	var query = {
 		student: studentid
 	};
 
-	var data = {
-		$push: {
-			attendance: {
-				signin: Math.floor(d.getTime() / 1000),
-				signout: 0
-			}
-		}
-	};
+	async.parallel([
+		function(done) {
+			var data = {
+				$push: {
+					attendance: {
+						in: time
+					}
+				}
+			};
 
-	users.update(query, data, function(err) {
+			db.users.update(query, data, function(err) {
+				if (err) {
+					done(err);
+				} else {
+					db.users.findOne(query, function(err, doc) {
+						done(null, doc);
+					});
+				}
+			});
+		},
+		function(done) {
+			db.users.findOne(query, function(err, doc) {
+				if (err) {
+					done(err);
+				} else {
+					db.attendance.insert({
+						student: studentid,
+						name: doc.name,
+						in: time
+					}, function(err) {
+						if (err) {
+							done(err);
+						} else {
+							done(null);
+						}
+					});
+				}
+			});
+		}
+	], function(err, results) {
 		if (err) {
 			callback(err);
 		} else {
-			users.findOne(query, function(err, doc) {
-				callback(null, doc.name);
-			});
+			callback(null, results[0]);
 		}
 	});
 }
 
 function signOut(studentid, callback) {
 	var d = new Date();
+	var time = d.getTime();
 
 	var query = {
 		student: studentid
 	};
 
-	users.findOne(query, function(err, doc) {
+	async.parallel([
+		function(done) {
+			db.users.findOne(query, function(err, doc) {
+				if (err) {
+					done(err);
+				} else {
+					var attendance = doc.attendance;
+
+					if (attendance.length) {
+						attendance[attendance.length - 1].out = d.getTime();
+
+						db.users.update(query, {
+							$set: {
+								attendance: attendance
+							}
+						}, function(err) {
+							if (err) {
+								done(err);
+							} else {
+								done(null, doc);
+							}
+						});
+					}
+				}
+			});
+		},
+		function(done) {
+			db.attendance.find(query, function(err, docs) {
+				if (err) {
+					done(err);
+				} else {
+					if (docs.length) {
+						db.attendance.update({
+							_id: docs[docs.length - 1]._id
+						}, {
+							$set: {
+								out: time
+							}
+						}, function(err) {
+							if (err) {
+								done(err);
+							} else {
+								done(null)
+							}
+						});
+					}
+				}
+			});
+		}
+	], function(err, results) {
 		if (err) {
 			callback(err);
 		} else {
-			var attendance = doc.attendance;
-
-			if (attendance.length) {
-				attendance[attendance.length - 1].signout = Math.floor(d.getTime() / 1000);
-
-				users.update(query, {
-					$set: {
-						attendance: attendance
-					}
-				}, function(err) {
-					if (err) {
-						callback(err);
-					} else {
-						callback(null, doc.name);
-					}
-				});
-			}
+			callback(null, results[0]);
 		}
 	});
 }

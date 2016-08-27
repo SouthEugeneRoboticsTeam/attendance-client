@@ -87,14 +87,14 @@
 			if (exists) {
 				checkState(studentid, function(state) {
 					if (state) {
-						signIn(studentid, function(err, name) {
+						signIn(studentid, function(err, user) {
 							if (err) {
 								console.log(err);
 							} else {
 								swal({
 									type: 'success',
 									title: 'Signed In',
-									text: name + ', you have successfully signed in!',
+									text: user.name + ', you have successfully signed in!',
 									timer: 2000
 								});
 
@@ -102,14 +102,14 @@
 							}
 						});
 					} else {
-						signOut(studentid, function(err, name) {
+						signOut(studentid, function(err, user) {
 							if (err) {
 								console.log(err);
 							} else {
 								swal({
 									type: 'warning',
 									title: 'Signed Out',
-									text: name + ', you have successfully signed out!',
+									text: user.name + ', you have successfully signed out!',
 									timer: 2000
 								});
 
@@ -140,14 +140,14 @@
 						if (err) {
 							console.log(err);
 						} else {
-							signIn(studentid, function(err, name) {
+							signIn(studentid, function(err, user) {
 								if (err) {
 									console.log(err);
 								} else {
 									swal({
 										type: 'success',
 										title: 'Signed In',
-										text: name + ', you have successfully signed in!',
+										text: user.name + ', you have successfully signed in!',
 										timer: 2000
 									});
 
@@ -171,7 +171,7 @@
 						if (err){
 							console.log(err);
 						} else {
-							var sec_num = parseInt(totalTime);
+							var sec_num = parseInt(totalTime / 1000);
 							var hours = Math.floor(sec_num / 3600);
 							var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
 							var seconds = sec_num - (hours * 3600) - (minutes * 60);
