@@ -1,3 +1,17 @@
+/**
+ * Load dependencies
+ */
+
+var jetpack = _interopDefault(require('fs-jetpack'));
+
+var appDir = jetpack.cwd(app.getAppPath());
+var manifest = appDir.read('package.json', 'json');
+var env = manifest.env;
+
+/**
+ * Do polls every X seconds
+ */
+
 setInterval(function() {
 	var base = env.url || "127.0.0.1";
 
@@ -88,6 +102,10 @@ setInterval(function() {
 	});
 }, 5 * 1000);
 
+/**
+ * Define functions
+ */
+
 function genUrl(base, path) {
 	if (!/^(f|ht)tps?:\/\//i.test(base)) {
 		base = "http://" + base;
@@ -98,4 +116,8 @@ function genUrl(base, path) {
 	}
 
 	return base + path.join("/");
+}
+
+function _interopDefault(ex) {
+	return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex;
 }

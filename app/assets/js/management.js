@@ -1,26 +1,26 @@
+/**
+ * Load dependencies
+ */
+
+var app = require('electron').remote.app;
 var Datastore = require('nedb');
 var async = require('async');
 
-var jetpack = _interopDefault(require('fs-jetpack'));
+/**
+ * Create datastores
+ */
 
 var db = {};
 
-db.users = new Datastore(__dirname + '/../datastore/users.db');
-db.attendance = new Datastore(__dirname + '/../datastore/attendance.db');
+db.users = new Datastore(app.getPath('appData') + '/' + app.getName() + '/datastore/users.db');
+db.attendance = new Datastore(app.getPath('appData') + '/' + app.getName() + '/datastore/attendance.db');
 
 db.users.loadDatabase();
 db.attendance.loadDatabase();
 
-var app$1;
-if (process.type === 'renderer') {
-	app$1 = require('electron').remote.app;
-} else {
-	app$1 = require('electron').app;
-}
-
-var appDir = jetpack.cwd(app$1.getAppPath());
-var manifest = appDir.read('package.json', 'json');
-var env = manifest.env;
+/**
+ * Define functions
+ */
 
 function checkExists(studentid, callback) {
 	var query = {
@@ -215,8 +215,4 @@ function signOut(studentid, callback) {
 			callback(null, results[0]);
 		}
 	});
-}
-
-function _interopDefault(ex) {
-	return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex;
 }
