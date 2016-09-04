@@ -1,6 +1,6 @@
 {
   "name": "attendance",
-  "productName": "Attendance",
+  "productName": "Attendance-Client",
   "description": "A client interface for SERT's attendance",
   "version": "0.0.1",
   "author": "Andrew Dassonville",

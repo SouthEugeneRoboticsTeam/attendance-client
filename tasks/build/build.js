@@ -75,19 +75,6 @@ gulp.task('bundle-watch', bundleTask);
 gulp.task('finalize', ['clean'], function () {
     var manifest = srcDir.read('package.json', 'json');
 
-    // Add "dev" or "test" suffix to name, so Electron will write all data
-    // like cookies and localStorage in separate places for each environment.
-    switch (utils.getEnvName()) {
-        case 'development':
-            manifest.name += '-dev';
-            manifest.productName += ' Dev';
-            break;
-        case 'test':
-            manifest.name += '-test';
-            manifest.productName += ' Test';
-            break;
-    }
-
     // Copy environment variables to package.json file for easy use
     // in the running application.
     manifest.env = projectDir.read('config/env_' + utils.getEnvName() + '.json', 'json');
