@@ -90,7 +90,7 @@ $("#submit").click(function() {
 				title: 'Create Account',
 				text: 'Enter your full name.',
 				input: 'text',
-				html: '<input type="checkbox" data-toggle="checkbox">&nbsp;&nbsp;Mentor</input>',
+				html: '<input type="checkbox" data-toggle="checkbox" id="mentor-box">&nbsp;&nbsp;Mentor</input>',
 				showCancelButton: true,
 				inputValidator: function(value) {
 					return new Promise(function(resolve, reject) {

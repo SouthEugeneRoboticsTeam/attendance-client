@@ -80,9 +80,11 @@ function checkHours(studentid, callback){
 }
 
 function create(studentid, name, callback) {
+	var mentor = $('#mentor-box').is(":checked");
 	var data = {
 		student: studentid,
 		name: name,
+		mentor: mentor,
 		attendance: []
 	};
 
