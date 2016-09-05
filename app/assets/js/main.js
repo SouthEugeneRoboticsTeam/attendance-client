@@ -195,8 +195,8 @@ if ($("[data-toggle=\"switch\"]").length) {
  */
 
 function initTitleBar() {
-	$("#title-bar-btns").show();
-	$("#title").show();
+	$("#title-bar-btns").css("visibility", "visible");
+	$("#title").css("visibility", "visible");
 
 	$("#min-btn").click(function() {
 		var window = remote.getCurrentWindow();
