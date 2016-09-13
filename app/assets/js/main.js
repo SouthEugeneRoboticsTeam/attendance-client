@@ -169,6 +169,19 @@ $("#check-hours").click(function() {
 	});
 });
 
+$("#kill-all").click(function() {
+	swal({
+		type: 'warning',
+		title: 'Remove Active Sessions',
+		text: 'Are you sure you wish to remove all active sessions?',
+		showCancelButton: true,
+	}).then(function(result) {
+		if (result) {
+			killAll();
+		}
+	});
+});
+
 /**
  * Enable some Bootstrap/Flat-UI features
  */

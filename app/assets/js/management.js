@@ -218,3 +218,7 @@ function signOut(studentid, callback) {
 		}
 	});
 }
+
+function killAll(callback) {
+
+}
