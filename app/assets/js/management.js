@@ -214,13 +214,25 @@ function signOut(studentid, callback) {
 					done(err);
 				} else {
 					if (docs.length) {
-						db.attendance.update({
-							_id: docs[docs.length - 1]._id
-						}, {
+						var largest = docs[0];
+
+						docs.forEach(function(doc) {
+							if (doc.in > largest.in) {
+								largest = doc;
+							}
+						});
+
+						var query = {
+							_id: largest._id
+						};
+
+						var data = {
 							$set: {
 								out: time
 							}
-						}, function(err) {
+						};
+
+						db.attendance.update(query, data, function(err) {
 							if (err) {
 								done(err);
 							} else {
