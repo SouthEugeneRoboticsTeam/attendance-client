@@ -5,31 +5,39 @@
 var app = require('electron').remote.app;
 var Datastore = require('nedb');
 var async = require('async');
+var path = require('path');
 
 /**
  * Create datastores
  */
 
 var db = {};
+
 db.options = new Datastore({
-	filename: app.getPath('appData') + '/Attendance-Client/options/options.db',
-    autoload: true,
+	filename: path.join(app.getPath('appData'), 'Attendance-Client', 'options', 'options.db'),
+	autoload: true,
 	onload: function(err) {
-		db.options.findOne({option: 'currentSeason'}, function(err, doc) {
+		db.options.findOne({ option: 'currentSeason' }, function(err, doc) {
 			if (err) {
 				console.log(err);
 			} else {
-				db.users = new Datastore({filename: app.getPath('appData') + '/Attendance-Client/seasons/' + doc.value + '/users.db',
-				 autoload: true
+				var year = (new Date()).getFullYear().toString();
+
+				var season = doc ? doc.value || year : year;
+
+				db.users = new Datastore({
+					filename: path.join(app.getPath('appData'), 'Attendance-Client', 'seasons', season, 'users.db'),
+					autoload: true
 				});
+
 				db.attendance = new Datastore({
-					filename: app.getPath('appData') + '/Attendance-Client/seasons/' + doc.value + '/attendance.db',
+					filename: path.join(app.getPath('appData'), 'Attendance-Client', 'seasons', season, 'attendance.db'),
 					autoload: true
 				});
 			}
 		});
 	}
-})
+});
 
 /**
  * Define functions
