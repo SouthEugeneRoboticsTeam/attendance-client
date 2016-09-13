@@ -11,12 +11,25 @@ var async = require('async');
  */
 
 var db = {};
-
-db.users = new Datastore(app.getPath('appData') + '/' + app.getName() + '/datastore/users.db');
-db.attendance = new Datastore(app.getPath('appData') + '/' + app.getName() + '/datastore/attendance.db');
-
-db.users.loadDatabase();
-db.attendance.loadDatabase();
+db.options = new Datastore({
+	filename: app.getPath('appData') + '/Attendance-Client/options/options.db',
+    autoload: true,
+	onload: function(err) {
+		db.options.findOne({option: 'currentSeason'}, function(err, doc) {
+			if (err) {
+				console.log(err);
+			} else {
+				db.users = new Datastore({filename: app.getPath('appData') + '/Attendance-Client/seasons/' + doc.value + '/users.db',
+				 autoload: true
+				});
+				db.attendance = new Datastore({
+					filename: app.getPath('appData') + '/Attendance-Client/seasons/' + doc.value + '/attendance.db',
+					autoload: true
+				});
+			}
+		});
+	}
+})
 
 /**
  * Define functions
