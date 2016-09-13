@@ -58,7 +58,7 @@ function checkState(studentid, callback) {
 		var attendance = doc.attendance;
 
 		if (attendance.length) {
-			if (attendance[attendance.length - 1].out) {
+			if (typeof attendance[attendance.length - 1].out !== 'undefined') {
 				callback(true);
 			} else {
 				callback(false);
@@ -232,6 +232,63 @@ function signOut(studentid, callback) {
 	});
 }
 
-function killAll(callback) {
+function killAll() {
+	var query = {
+		out: {
+			$exists: false
+		}
+	};
 
+	var data = {
+		$set: {
+			out: 0,
+			forced: true
+		}
+	};
+
+	db.attendance.find(query, function(err, docs) {
+		db.attendance.update(query, data, { multi: true }, function(err) {
+			if (err) {
+				console.log(err);
+			}
+		});
+
+		docs.forEach(function(doc) {
+			var query = {
+				student: doc.student
+			};
+
+			db.users.findOne(query, function(err, doc) {
+				var attendance = [];
+
+				doc.attendance.forEach(function(data) {
+					var d;
+
+					if (data.out) {
+						d = data;
+					} else {
+						d = {
+							in: data.in,
+							out: 0,
+							forced: true
+						};
+					}
+
+					attendance.push(d);
+				});
+
+				var data = {
+					$set: {
+						attendance: attendance
+					}
+				};
+
+				db.users.update(query, data, function(err) {
+					if (err) {
+						console.log(err);
+					}
+				});
+			});
+		});
+	});
 }
