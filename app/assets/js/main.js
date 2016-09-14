@@ -19,7 +19,7 @@ $(document).ready(function() {
 });
 
 $("#student-id").on("input", function() {
-	var studentid = $("#student-id").val();
+	var studentid = parseInt($("#student-id").val());
 
 	if (studentid) {
 		checkExists(studentid, function(exists) {
@@ -47,65 +47,13 @@ $("#student-id").on("input", function() {
 });
 
 $("#submit").click(function() {
-	var studentid = $("#student-id").val();
+	var studentid = parseInt($("#student-id").val());
 
-	checkExists(studentid, function(exists) {
-		if (exists) {
-			checkState(studentid, function(state) {
-				if (state) {
-					signIn(studentid, function(err, user) {
-						if (err) {
-							console.log(err);
-						} else {
-							swal({
-								type: 'success',
-								title: 'Signed In',
-								text: user.name + ', you have successfully signed in!',
-								timer: 2000
-							});
-
-							clearSubmit();
-						}
-					});
-				} else {
-					signOut(studentid, function(err, user) {
-						if (err) {
-							console.log(err);
-						} else {
-							swal({
-								type: 'warning',
-								title: 'Signed Out',
-								text: user.name + ', you have successfully signed out!',
-								timer: 2000
-							});
-
-							clearSubmit();
-						}
-					});
-				}
-			});
-		} else {
-			swal({
-				type: 'warning',
-				title: 'Create Account',
-				text: 'Enter your full name.',
-				input: 'text',
-				html: '<input type="checkbox" data-toggle="checkbox" id="mentor-box">&nbsp;&nbsp;Mentor</input>',
-				showCancelButton: true,
-				inputValidator: function(value) {
-					return new Promise(function(resolve, reject) {
-						if (value && isNaN(value)) {
-							resolve();
-						} else {
-							reject('Please enter your name!');
-						}
-					});
-				}
-			}).then(function(result) {
-				create(studentid, result, function(err) {
-					if (err) {
-						console.log(err);
-					} else {
+	if (studentid) {
+		checkExists(studentid, function(exists) {
+			if (exists) {
+				checkState(studentid, function(state) {
+					if (state) {
 						signIn(studentid, function(err, user) {
 							if (err) {
 								console.log(err);
@@ -120,11 +68,65 @@ $("#submit").click(function() {
 								clearSubmit();
 							}
 						});
+					} else {
+						signOut(studentid, function(err, user) {
+							if (err) {
+								console.log(err);
+							} else {
+								swal({
+									type: 'warning',
+									title: 'Signed Out',
+									text: user.name + ', you have successfully signed out!',
+									timer: 2000
+								});
+
+								clearSubmit();
+							}
+						});
 					}
 				});
-			});
-		}
-	});
+			} else {
+				swal({
+					type: 'warning',
+					title: 'Create Account',
+					text: 'Enter your full name.',
+					input: 'text',
+					html: '<input type="checkbox" data-toggle="checkbox" id="mentor-box">&nbsp;&nbsp;Mentor</input>',
+					showCancelButton: true,
+					inputValidator: function(value) {
+						return new Promise(function(resolve, reject) {
+							if (value && isNaN(value)) {
+								resolve();
+							} else {
+								reject('Please enter your name!');
+							}
+						});
+					}
+				}).then(function(result) {
+					create(studentid, result, function(err) {
+						if (err) {
+							console.log(err);
+						} else {
+							signIn(studentid, function(err, user) {
+								if (err) {
+									console.log(err);
+								} else {
+									swal({
+										type: 'success',
+										title: 'Signed In',
+										text: user.name + ', you have successfully signed in!',
+										timer: 2000
+									});
+
+									clearSubmit();
+								}
+							});
+						}
+					});
+				});
+			}
+		});
+	}
 });
 
 $("#check-hours").click(function() {
