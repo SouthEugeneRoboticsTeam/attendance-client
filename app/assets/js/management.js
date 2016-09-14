@@ -39,6 +39,12 @@ db.options = new Datastore({
 	}
 });
 
+var killTime = 0;
+
+db.options.findOne({ option: "killTime"}, function(err, doc){
+	killTime = doc.value;
+});
+
 /**
  * Define functions
  */

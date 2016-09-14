@@ -18,6 +18,39 @@ $(document).ready(function() {
 	}
 });
 
+setInterval(function() {
+	db.users.find({}, function(err, docs) {
+		if (err) {
+			console.log(err);
+		} else {
+			docs.forEach(function(user) {
+				if (user.attendance[user.attendance.length - 1].in + (killTime * 360000) <= (new Date()).getTime()) {
+					var attendance = [];
+					user.attendance.forEach(function(log) {
+						attendance.push(log);
+						attendance[attendance.length -1].out = (new Date()).getTime();
+					});
+					var query = {
+						student: user.studentid
+					};
+
+					var data = {
+						$set: {
+							attendance: attendance
+						}
+					};
+
+					db.users.update(query, data, function(err) {
+						if (err) {
+							console.log(err);
+						}
+					});
+				}
+			});
+		}
+	});
+}, 30 * 1000);
+
 $("#student-id").on("input", function() {
 	var studentid = parseInt($("#student-id").val());
 
