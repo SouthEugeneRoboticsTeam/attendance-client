@@ -24,14 +24,15 @@ setInterval(function() {
 			console.log(err);
 		} else {
 			docs.forEach(function(user) {
-				if (user.attendance[user.attendance.length - 1].in + (killTime * 360000) <= (new Date()).getTime()) {
+				if (user.attendance[user.attendance.length - 1].in + (killTime * 360000) <= (new Date()).getTime() && !user.attendance[user.attendance.length - 1].out) {
 					var attendance = [];
 					user.attendance.forEach(function(log) {
 						attendance.push(log);
-						attendance[attendance.length -1].out = (new Date()).getTime();
 					});
+					attendance[attendance.length -1].out = user.attendance[user.attendance.length - 1].in;
+
 					var query = {
-						student: user.studentid
+						student: user.student
 					};
 
 					var data = {

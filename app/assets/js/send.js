@@ -100,7 +100,7 @@ setInterval(function() {
 			}
 		});
 	});
-}, 5 * 1000);
+}, 120 * 1000);
 
 /**
  * Define functions
