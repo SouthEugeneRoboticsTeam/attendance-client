@@ -16,6 +16,11 @@ $(document).ready(function() {
 	if (!(os.platform() === 'darwin' && os.release().split('.')[0] >= 10)) {
 		initTitleBar();
 	}
+	$("#student-id").keypress(function(e) {
+		if (e.keyCode == 13) {
+			$("#submit").click();
+		}
+	})
 });
 
 setInterval(function() {
@@ -164,7 +169,7 @@ $("#submit").click(function() {
 });
 
 $("#check-hours").click(function() {
-	var studentid = $("#student-id").val();
+	var studentid = parseInt($("#student-id").val());
 
 	checkExists(studentid, function(exists) {
 		if (exists) {
