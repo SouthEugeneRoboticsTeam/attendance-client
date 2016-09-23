@@ -68,7 +68,7 @@ function checkExists(studentid, callback) {
 function checkState(studentid, callback) {
 	var query = {
 		student: studentid
-	}
+	};
 
 	db.users.findOne(query, function(err, doc) {
 		var attendance = doc.attendance;
