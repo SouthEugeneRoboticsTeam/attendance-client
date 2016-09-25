@@ -29,7 +29,7 @@ setInterval(function() {
 			console.log(err);
 		} else {
 			docs.forEach(function(user) {
-				if (user.attendance[user.attendance.length - 1].in + (killTime * 360000) <= (new Date()).getTime() && !user.attendance[user.attendance.length - 1].out) {
+				if (user.attendance[user.attendance.length - 1].in + (killTime * 3600000) <= (new Date()).getTime() && !user.attendance[user.attendance.length - 1].out) {
 					var attendance = [];
 					user.attendance.forEach(function(log) {
 						attendance.push(log);
