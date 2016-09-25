@@ -39,6 +39,25 @@ db.options = new Datastore({
 	}
 });
 
+db.options.find({}, function(err, docs) {
+    if(err) {
+        console.log(err);
+    } else {
+         if(!docs.length) {
+            console.log("Options initialized!");
+        	var data = [
+                {option: 'killTime', value: 10},
+                {option: 'currentSeason', value: 'defaultSeason'}
+            ];
+        	db.options.insert(data, function(err) {
+                if (err) {
+        			console.log(err);
+        		}
+        	});
+        }
+    }
+});
+
 var killTime = 0;
 
 db.options.findOne({ option: "killTime"}, function(err, doc) {
