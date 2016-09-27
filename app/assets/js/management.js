@@ -45,10 +45,13 @@ db.options.find({}, function(err, docs) {
     } else {
          if(!docs.length) {
             console.log("Options initialized!");
-        	var data = [
-                {option: 'killTime', value: 10},
-                {option: 'currentSeason', value: 'defaultSeason'}
-            ];
+			var data = [
+				{option: 'killTime', value: 10},
+				{option: 'currentSeason', value: 'defaultSeason'},
+				{option: 'oldSeasons', value: [
+					{name: 'defaultSeason'}
+				]}
+			];
         	db.options.insert(data, function(err) {
                 if (err) {
         			console.log(err);
