@@ -51,6 +51,7 @@ setInterval(function() {
 							console.log(err);
 						}
 					});
+					console.log(user.name + ": Sign in destroyed!");
 				}
 			});
 		}
