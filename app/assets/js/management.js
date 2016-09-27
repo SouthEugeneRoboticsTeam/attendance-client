@@ -23,7 +23,7 @@ db.options = new Datastore({
 			} else {
 				var year = (new Date()).getFullYear().toString();
 
-				var season = doc ? doc.value || year : year;
+				var season = doc ? doc.value || "defaultSeason" : "defaultSeason";
 
 				db.users = new Datastore({
 					filename: path.join(app.getPath('appData'), 'Attendance-Client', 'seasons', season, 'users.db'),
