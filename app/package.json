@@ -2,8 +2,8 @@
   "name": "attendance",
   "productName": "Attendance-Client",
   "description": "A client interface for SERT's attendance",
-  "version": "0.0.1",
-  "author": "Andrew Dassonville",
+  "version": "1.0.0",
+  "author": "Evan Hopper-Moore and Andrew Dassonville",
   "license": "GPL-3.0",
   "main": "background.js",
   "dependencies": {
