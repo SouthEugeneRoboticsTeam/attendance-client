@@ -103,7 +103,7 @@ $('#submit').click(function() {
 									title: 'Signed In',
 									text: user.name + ', you have successfully signed in!',
 									timer: 2000
-								});
+								}).then(focusInput, focusInput);
 
 								clearSubmit();
 							}
@@ -118,7 +118,7 @@ $('#submit').click(function() {
 									title: 'Signed Out',
 									text: user.name + ', you have successfully signed out!',
 									timer: 2000
-								});
+								}).then(focusInput, focusInput);
 
 								clearSubmit();
 							}
@@ -131,7 +131,7 @@ $('#submit').click(function() {
 					title: 'Create Account',
 					text: 'Enter your full name.',
 					input: 'text',
-					html: '<input type='checkbox' data-toggle='checkbox' id='mentor-box'>&nbsp;&nbsp;Mentor</input>',
+					html: '<input type=\'checkbox\' data-toggle=\'checkbox\' id=\'mentor-box\'>&nbsp;&nbsp;Mentor</input>',
 					showCancelButton: true,
 					inputValidator: function(value) {
 						return new Promise(function(resolve, reject) {
@@ -156,7 +156,7 @@ $('#submit').click(function() {
 										title: 'Signed In',
 										text: user.name + ', you have successfully signed in!',
 										timer: 2000
-									});
+									}).then(focusInput, focusInput);
 
 									clearSubmit();
 								}
@@ -193,7 +193,7 @@ $('#check-hours').click(function() {
 							//title: 'Records Found',
 							text: 'You have spent ' + hours + ':' + minutes + ':' + seconds + ' in the shop.',
 							timer: 5000
-						});
+						}).then(focusInput, focusInput);
 
 						clearSubmit();
 					}
@@ -204,7 +204,7 @@ $('#check-hours').click(function() {
 				type: 'warning',
 				title: 'Account Not Found',
 				text: 'Please enter a valid account!'
-			});
+			}).then(focusInput, focusInput);
 
 			clearSubmit();
 		}
@@ -275,4 +275,8 @@ function clearSubmit() {
 	$('#submit').text('Sign In/Out');
 	$('#submit').attr('class', 'btn sign-in btn-primary');
 	$('#student-id-div').attr('class', 'form-group');
+}
+
+function focusInput() {
+	$('#student-id').focus();
 }
