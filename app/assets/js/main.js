@@ -16,9 +16,9 @@ $(document).ready(function() {
 	if (!(os.platform() === 'darwin' && os.release().split('.')[0] >= 10)) {
 		initTitleBar();
 	}
-	$("#student-id").keypress(function(e) {
+	$('#student-id').keypress(function(e) {
 		if (e.keyCode == 13) {
-			$("#submit").click();
+			$('#submit').click();
 		}
 	})
 });
@@ -51,34 +51,34 @@ setInterval(function() {
 							console.log(err);
 						}
 					});
-					console.log(user.name + ": Sign in destroyed!");
+					console.log(user.name + ': Sign in destroyed!');
 				}
 			});
 		}
 	});
 }, 30 * 1000);
 
-$("#student-id").on("input", function() {
-	var studentid = parseInt($("#student-id").val());
+$('#student-id').on('input', function() {
+	var studentid = parseInt($('#student-id').val());
 
 	if (studentid) {
 		checkExists(studentid, function(exists) {
 			if (exists) {
 				checkState(studentid, function(state) {
 					if (state) {
-						$("#submit").text("Sign In");
-						$("#submit").attr("class", "btn sign-in btn-success");
-						$("#student-id-div").attr("class", "form-group has-success");
+						$('#submit').text('Sign In');
+						$('#submit').attr('class', 'btn sign-in btn-success');
+						$('#student-id-div').attr('class', 'form-group has-success');
 					} else {
-						$("#submit").text("Sign Out");
-						$("#submit").attr("class", "btn sign-in btn-danger");
-						$("#student-id-div").attr("class", "form-group has-error");
+						$('#submit').text('Sign Out');
+						$('#submit').attr('class', 'btn sign-in btn-danger');
+						$('#student-id-div').attr('class', 'form-group has-error');
 					}
 				});
 			} else {
-				$("#submit").text("New User");
-				$("#submit").attr("class", "btn sign-in btn-info");
-				$("#student-id-div").attr("class", "form-group");
+				$('#submit').text('New User');
+				$('#submit').attr('class', 'btn sign-in btn-info');
+				$('#student-id-div').attr('class', 'form-group');
 			}
 		});
 	} else {
@@ -86,8 +86,8 @@ $("#student-id").on("input", function() {
 	}
 });
 
-$("#submit").click(function() {
-	var studentid = parseInt($("#student-id").val());
+$('#submit').click(function() {
+	var studentid = parseInt($('#student-id').val());
 
 	if (studentid) {
 		checkExists(studentid, function(exists) {
@@ -131,7 +131,7 @@ $("#submit").click(function() {
 					title: 'Create Account',
 					text: 'Enter your full name.',
 					input: 'text',
-					html: '<input type="checkbox" data-toggle="checkbox" id="mentor-box">&nbsp;&nbsp;Mentor</input>',
+					html: '<input type='checkbox' data-toggle='checkbox' id='mentor-box'>&nbsp;&nbsp;Mentor</input>',
 					showCancelButton: true,
 					inputValidator: function(value) {
 						return new Promise(function(resolve, reject) {
@@ -169,8 +169,8 @@ $("#submit").click(function() {
 	}
 });
 
-$("#check-hours").click(function() {
-	var studentid = parseInt($("#student-id").val());
+$('#check-hours').click(function() {
+	var studentid = parseInt($('#student-id').val());
 
 	checkExists(studentid, function(exists) {
 		if (exists) {
@@ -184,9 +184,9 @@ $("#check-hours").click(function() {
 						var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
 						var seconds = sec_num - (hours * 3600) - (minutes * 60);
 
-						if (hours < 10) {hours   = "0"+hours;}
-						if (minutes < 10) {minutes = "0"+minutes;}
-						if (seconds < 10) {seconds = "0"+seconds;}
+						if (hours < 10) {hours   = '0'+hours;}
+						if (minutes < 10) {minutes = '0'+minutes;}
+						if (seconds < 10) {seconds = '0'+seconds;}
 						//seconds for testing, remove in final version
 						swal({
 							type: 'info',
@@ -211,7 +211,7 @@ $("#check-hours").click(function() {
 	});
 });
 
-$("#kill-all").click(function() {
+$('#kill-all').click(function() {
 	swal({
 		type: 'warning',
 		title: 'Remove Active Sessions',
@@ -229,20 +229,20 @@ $("#kill-all").click(function() {
  */
 
 // Custom Selects
-if ($("[data-toggle=\"select\"]").length) {
-	$("[data-toggle=\"select\"]").select2();
+if ($('[data-toggle=\'select\']').length) {
+	$('[data-toggle=\'select\']').select2();
 }
 
 // Checkboxes and Radio buttons
-$("[data-toggle=\"checkbox\"]").radiocheck();
-$("[data-toggle=\"radio\"]").radiocheck();
+$('[data-toggle=\'checkbox\']').radiocheck();
+$('[data-toggle=\'radio\']').radiocheck();
 
 // Tooltips
-$("[data-toggle=\"tooltip\"]").tooltip("show");
+$('[data-toggle=\'tooltip\']').tooltip('show');
 
 // Switches
-if ($("[data-toggle=\"switch\"]").length) {
-	$("[data-toggle=\"switch\"]").bootstrapSwitch();
+if ($('[data-toggle=\'switch\']').length) {
+	$('[data-toggle=\'switch\']').bootstrapSwitch();
 }
 
 /**
@@ -250,20 +250,20 @@ if ($("[data-toggle=\"switch\"]").length) {
  */
 
 function initTitleBar() {
-	$("#title-bar-btns").css("visibility", "visible");
-	$("#title").css("visibility", "visible");
+	$('#title-bar-btns').css('visibility', 'visible');
+	$('#title').css('visibility', 'visible');
 
-	$("#min-btn").click(function() {
+	$('#min-btn').click(function() {
 		var window = remote.getCurrentWindow();
 		window.minimize();
 	});
 
-	$("#max-btn").click(function() {
+	$('#max-btn').click(function() {
 		var window = remote.getCurrentWindow();
 		window.maximize();
 	});
 
-	$("#close-btn").click(function() {
+	$('#close-btn').click(function() {
 		var window = remote.getCurrentWindow();
 		window.close();
 	});
@@ -272,7 +272,7 @@ function initTitleBar() {
 function clearSubmit() {
 	$('#student-id').val('');
 
-	$("#submit").text("Sign In/Out");
-	$("#submit").attr("class", "btn sign-in btn-primary");
-	$("#student-id-div").attr("class", "form-group");
+	$('#submit').text('Sign In/Out');
+	$('#submit').attr('class', 'btn sign-in btn-primary');
+	$('#student-id-div').attr('class', 'form-group');
 }

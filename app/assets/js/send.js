@@ -13,7 +13,7 @@ var env = manifest.env;
  */
 
 setInterval(function() {
-	var base = env.url || "127.0.0.1";
+	var base = env.url || '127.0.0.1';
 
 	db.attendance.find({}, function(err, docs) {
 		docs.forEach(function(doc) {
@@ -23,8 +23,8 @@ setInterval(function() {
 				async.waterfall([
 					function(done) {
 						$.ajax({
-							type: "GET",
-							url: genUrl(base, ["users", doc.student]),
+							type: 'GET',
+							url: genUrl(base, ['users', doc.student]),
 							success: function(resp) {
 								if (resp && resp.success) {
 									if (resp.response) {
@@ -33,7 +33,7 @@ setInterval(function() {
 										done(null, false);
 									}
 								} else {
-									done(new Error("Response failed"));
+									done(new Error('Response failed'));
 								}
 							}
 						});
@@ -41,8 +41,8 @@ setInterval(function() {
 					function(data, done) {
 						if (data) {
 							$.ajax({
-								type: "PUT",
-								url: genUrl(base, ["users", doc.student]),
+								type: 'PUT',
+								url: genUrl(base, ['users', doc.student]),
 								data: {
 									in: doc.in,
 									out: doc.out
@@ -59,8 +59,8 @@ setInterval(function() {
 							async.waterfall([
 								function(done) {
 									$.ajax({
-										type: "POST",
-										url: genUrl(base, ["users"]),
+										type: 'POST',
+										url: genUrl(base, ['users']),
 										data: {
 											studentid: doc.student,
 											name: doc.name
@@ -76,8 +76,8 @@ setInterval(function() {
 								},
 								function(done) {
 									$.ajax({
-										type: "PUT",
-										url: genUrl(base, ["users", doc.student]),
+										type: 'PUT',
+										url: genUrl(base, ['users', doc.student]),
 										data: {
 											in: doc.in,
 											out: doc.out
@@ -108,14 +108,14 @@ setInterval(function() {
 
 function genUrl(base, path) {
 	if (!/^(f|ht)tps?:\/\//i.test(base)) {
-		base = "http://" + base;
+		base = 'http://' + base;
 	}
 
 	if (!/\/$/i.test(base)) {
-		base = base + "/";
+		base = base + '/';
 	}
 
-	return base + path.join("/");
+	return base + path.join('/');
 }
 
 function _interopDefault(ex) {

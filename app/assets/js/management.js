@@ -23,7 +23,7 @@ db.options = new Datastore({
 			} else {
 				var year = (new Date()).getFullYear().toString();
 
-				var season = doc ? doc.value || "defaultSeason" : "defaultSeason";
+				var season = doc ? doc.value || 'defaultSeason' : 'defaultSeason';
 
 				db.users = new Datastore({
 					filename: path.join(app.getPath('appData'), 'Attendance-Client', 'seasons', season, 'users.db'),
@@ -44,7 +44,7 @@ db.options.find({}, function(err, docs) {
         console.log(err);
     } else {
          if(!docs.length) {
-            console.log("Options initialized!");
+            console.log('Options initialized!');
 			var data = [
 				{option: 'killTime', value: 10},
 				{option: 'currentSeason', value: 'defaultSeason'},
@@ -63,7 +63,7 @@ db.options.find({}, function(err, docs) {
 
 var killTime = 0;
 
-db.options.findOne({ option: "killTime"}, function(err, doc) {
+db.options.findOne({ option: 'killTime'}, function(err, doc) {
 	if (doc) {
 		killTime = doc.value;
 	}
@@ -131,7 +131,7 @@ function checkHours(studentid, callback){
 }
 
 function create(studentid, name, callback) {
-	var mentor = $('#mentor-box').is(":checked");
+	var mentor = $('#mentor-box').is(':checked');
 	var data = {
 		student: studentid,
 		name: name,
