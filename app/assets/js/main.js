@@ -113,14 +113,16 @@ $('#submit').click(function() {
 							if (err) {
 								console.log(err);
 							} else {
-								swal({
-									type: 'warning',
-									title: 'Signed Out',
-									text: user.name + ', you have successfully signed out!',
-									timer: 2000
-								}).then(focusInput, focusInput);
+								getTime(studentid, function(time) {
+									swal({
+										type: 'warning',
+										title: 'Signed Out',
+										text: user.name + ', you have successfully signed out! (' + time.hours + ':' + time.minutes + ':' + time.seconds + ')',
+										timer: 2000
+									}).then(focusInput, focusInput);
 
-								clearSubmit();
+									clearSubmit();
+								});
 							}
 						});
 					}
@@ -174,30 +176,15 @@ $('#check-hours').click(function() {
 
 	checkExists(studentid, function(exists) {
 		if (exists) {
-			checkState(studentid, function(state) {
-				checkHours(studentid, function (err, totalTime){
-					if (err){
-						console.log(err);
-					} else {
-						var sec_num = parseInt(totalTime / 1000);
-						var hours = Math.floor(sec_num / 3600);
-						var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-						var seconds = sec_num - (hours * 3600) - (minutes * 60);
+			getTime(studentid, function(time) {
+				swal({
+					type: 'info',
+					//title: 'Records Found',
+					text: 'You have spent ' + time.hours + ':' + time.minutes + ':' + time.seconds + ' in the shop.',
+					timer: 5000
+				}).then(focusInput, focusInput);
 
-						if (hours < 10) {hours   = '0'+hours;}
-						if (minutes < 10) {minutes = '0'+minutes;}
-						if (seconds < 10) {seconds = '0'+seconds;}
-						//seconds for testing, remove in final version
-						swal({
-							type: 'info',
-							//title: 'Records Found',
-							text: 'You have spent ' + hours + ':' + minutes + ':' + seconds + ' in the shop.',
-							timer: 5000
-						}).then(focusInput, focusInput);
-
-						clearSubmit();
-					}
-				});
+				clearSubmit();
 			});
 		} else {
 			swal({
@@ -278,5 +265,31 @@ function clearSubmit() {
 }
 
 function focusInput() {
-	$('#student-id').focus();
+	setTimeout(function() {
+		console.log('fOcUsInG')
+		$('#student-id').focus();
+	}, 250)
+}
+
+function getTime(studentid, callback) {
+	checkHours(studentid, function(err, totalTime) {
+		if (err) {
+			console.log(err);
+		} else {
+			var sec_num = parseInt(totalTime / 1000);
+			var hours = Math.floor(sec_num / 3600);
+			var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+			var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+			if (hours < 10) hours = '0' + hours;
+			if (minutes < 10) minutes = '0' + minutes;
+			if (seconds < 10) seconds = '0' + seconds;
+
+			callback({
+				hours: hours,
+				minutes: minutes,
+				seconds: seconds
+			});
+		}
+	});
 }
