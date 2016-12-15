@@ -266,7 +266,6 @@ function clearSubmit() {
 
 function focusInput() {
 	setTimeout(function() {
-		console.log('fOcUsInG')
 		$('#student-id').focus();
 	}, 250)
 }
