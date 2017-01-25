@@ -17,7 +17,7 @@ db.options = new Datastore({
 	filename: path.join(app.getPath('appData'), 'Attendance-Client', 'options', 'options.db'),
 	autoload: true,
 	onload: function(err) {
-		db.options.findOne({ option: 'currentSeason' }, function(err, doc) {
+		db.options.findOne({option: 'currentSeason'}, function(err, doc) {
 			if (err) {
 				console.log(err);
 			} else {
@@ -40,30 +40,32 @@ db.options = new Datastore({
 });
 
 db.options.find({}, function(err, docs) {
-    if(err) {
-        console.log(err);
-    } else {
-         if(!docs.length) {
-            console.log('Options initialized!');
+	if (err) {
+		console.log(err);
+	} else {
+		if (!docs.length) {
+			console.log('Options initialized!');
 			var data = [
 				{option: 'killTime', value: 10},
 				{option: 'currentSeason', value: 'defaultSeason'},
-				{option: 'oldSeasons', value: [
+				{
+					option: 'oldSeasons', value: [
 					{name: 'defaultSeason'}
-				]}
+				]
+				}
 			];
-        	db.options.insert(data, function(err) {
-                if (err) {
-        			console.log(err);
-        		}
-        	});
-        }
-    }
+			db.options.insert(data, function(err) {
+				if (err) {
+					console.log(err);
+				}
+			});
+		}
+	}
 });
 
 var killTime = 0;
 
-db.options.findOne({ option: 'killTime'}, function(err, doc) {
+db.options.findOne({option: 'killTime'}, function(err, doc) {
 	if (doc) {
 		killTime = doc.value;
 	}
@@ -105,7 +107,7 @@ function checkState(studentid, callback) {
 	});
 }
 
-function checkHours(studentid, callback){
+function checkHours(studentid, callback) {
 	var query = {
 		student: studentid
 	};
@@ -118,7 +120,7 @@ function checkHours(studentid, callback){
 
 			if (attendance.length) {
 				var totalTime = 0;
-				attendance.forEach(function(session){
+				attendance.forEach(function(session) {
 					if (session.out) {
 						totalTime += session.out - session.in;
 					}
@@ -297,7 +299,7 @@ function killAll() {
 	};
 
 	db.attendance.find(query, function(err, docs) {
-		db.attendance.update(query, data, { multi: true }, function(err) {
+		db.attendance.update(query, data, {multi: true}, function(err) {
 			if (err) {
 				console.log(err);
 			}

@@ -34,7 +34,7 @@ setInterval(function() {
 					user.attendance.forEach(function(log) {
 						attendance.push(log);
 					});
-					attendance[attendance.length -1].out = user.attendance[user.attendance.length - 1].in;
+					attendance[attendance.length - 1].out = user.attendance[user.attendance.length - 1].in;
 
 					var query = {
 						student: user.student
@@ -176,41 +176,41 @@ $('#check-hours').click(function() {
 
 	checkExists(studentid, function(exists) {
 		if (exists) {
-            checkState(studentid, function(signedOut) {
-                if (signedOut) {
-                    getTime(studentid, function(time) {
-                        swal({
-                            type: 'info',
-                            text: 'You have spent ' + time.hours + ':' + time.minutes + ':' + time.seconds + ' in the shop.',
-                            timer: 5000
-                        }).then(focusInput, focusInput);
+			checkState(studentid, function(signedOut) {
+				if (signedOut) {
+					getTime(studentid, function(time) {
+						swal({
+							type: 'info',
+							text: 'You have spent ' + time.hours + ':' + time.minutes + ':' + time.seconds + ' in the shop.',
+							timer: 5000
+						}).then(focusInput, focusInput);
 
-                        clearSubmit();
-                    });
-                } else {
-                    signOut(studentid, function(err, user) {
-                        if (err) {
-                            console.log(err);
-                        } else {
-                            signIn(studentid, function(err, user) {
-                                if (err) {
-                                    console.log(err);
-                                } else {
-                                    getTime(studentid, function(time) {
-                                        swal({
-                                            type: 'info',
-                                            text: 'You have spent ' + time.hours + ':' + time.minutes + ':' + time.seconds + ' in the shop.',
-                                            timer: 5000
-                                        }).then(focusInput, focusInput);
+						clearSubmit();
+					});
+				} else {
+					signOut(studentid, function(err, user) {
+						if (err) {
+							console.log(err);
+						} else {
+							signIn(studentid, function(err, user) {
+								if (err) {
+									console.log(err);
+								} else {
+									getTime(studentid, function(time) {
+										swal({
+											type: 'info',
+											text: 'You have spent ' + time.hours + ':' + time.minutes + ':' + time.seconds + ' in the shop.',
+											timer: 5000
+										}).then(focusInput, focusInput);
 
-                                        clearSubmit();
-                                    });
-                                }
-                            });
-                        }
-                    });
-                }
-            });
+										clearSubmit();
+									});
+								}
+							});
+						}
+					});
+				}
+			});
 		} else {
 			swal({
 				type: 'warning',
