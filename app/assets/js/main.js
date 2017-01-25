@@ -17,7 +17,7 @@ $(document).ready(function() {
 		initTitleBar();
 	}
 	$('#student-id').keypress(function(e) {
-		if (e.keyCode == 13) {
+		if (e.keyCode === 13) {
 			$('#submit').click();
 		}
 	})
@@ -34,7 +34,7 @@ setInterval(function() {
 					user.attendance.forEach(function(log) {
 						attendance.push(log);
 					});
-					attendance[attendance.length -1].out = user.attendance[user.attendance.length - 1].in;
+					attendance[attendance.length - 1].out = user.attendance[user.attendance.length - 1].in;
 
 					var query = {
 						student: user.student
@@ -64,8 +64,8 @@ $('#student-id').on('input', function() {
 	if (studentid) {
 		checkExists(studentid, function(exists) {
 			if (exists) {
-				checkState(studentid, function(state) {
-					if (state) {
+				checkState(studentid, function(signedOut) {
+					if (signedOut) {
 						$('#submit').text('Sign In');
 						$('#submit').attr('class', 'btn sign-in btn-success');
 						$('#student-id-div').attr('class', 'form-group has-success');
@@ -176,15 +176,40 @@ $('#check-hours').click(function() {
 
 	checkExists(studentid, function(exists) {
 		if (exists) {
-			getTime(studentid, function(time) {
-				swal({
-					type: 'info',
-					//title: 'Records Found',
-					text: 'You have spent ' + time.hours + ':' + time.minutes + ':' + time.seconds + ' in the shop.',
-					timer: 5000
-				}).then(focusInput, focusInput);
+			checkState(studentid, function(signedOut) {
+				if (signedOut) {
+					getTime(studentid, function(time) {
+						swal({
+							type: 'info',
+							text: 'You have spent ' + time.hours + ':' + time.minutes + ':' + time.seconds + ' in the shop.',
+							timer: 5000
+						}).then(focusInput, focusInput);
 
-				clearSubmit();
+						clearSubmit();
+					});
+				} else {
+					signOut(studentid, function(err, user) {
+						if (err) {
+							console.log(err);
+						} else {
+							signIn(studentid, function(err, user) {
+								if (err) {
+									console.log(err);
+								} else {
+									getTime(studentid, function(time) {
+										swal({
+											type: 'info',
+											text: 'You have spent ' + time.hours + ':' + time.minutes + ':' + time.seconds + ' in the shop.',
+											timer: 5000
+										}).then(focusInput, focusInput);
+
+										clearSubmit();
+									});
+								}
+							});
+						}
+					});
+				}
 			});
 		} else {
 			swal({

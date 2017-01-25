@@ -17,7 +17,7 @@ db.options = new Datastore({
 	filename: path.join(app.getPath('appData'), 'Attendance-Client', 'options', 'options.db'),
 	autoload: true,
 	onload: function(err) {
-		db.options.findOne({ option: 'currentSeason' }, function(err, doc) {
+		db.options.findOne({option: 'currentSeason'}, function(err, doc) {
 			if (err) {
 				console.log(err);
 			} else {
@@ -40,30 +40,32 @@ db.options = new Datastore({
 });
 
 db.options.find({}, function(err, docs) {
-    if(err) {
-        console.log(err);
-    } else {
-         if(!docs.length) {
-            console.log('Options initialized!');
+	if (err) {
+		console.log(err);
+	} else {
+		if (!docs.length) {
+			console.log('Options initialized!');
 			var data = [
 				{option: 'killTime', value: 10},
 				{option: 'currentSeason', value: 'defaultSeason'},
-				{option: 'oldSeasons', value: [
+				{
+					option: 'oldSeasons', value: [
 					{name: 'defaultSeason'}
-				]}
+				]
+				}
 			];
-        	db.options.insert(data, function(err) {
-                if (err) {
-        			console.log(err);
-        		}
-        	});
-        }
-    }
+			db.options.insert(data, function(err) {
+				if (err) {
+					console.log(err);
+				}
+			});
+		}
+	}
 });
 
 var killTime = 0;
 
-db.options.findOne({ option: 'killTime'}, function(err, doc) {
+db.options.findOne({option: 'killTime'}, function(err, doc) {
 	if (doc) {
 		killTime = doc.value;
 	}
@@ -105,10 +107,10 @@ function checkState(studentid, callback) {
 	});
 }
 
-function checkHours(studentid, callback){
+function checkHours(studentid, callback) {
 	var query = {
 		student: studentid
-	}
+	};
 
 	db.users.findOne(query, function(err, doc) {
 		if (err) {
@@ -118,7 +120,7 @@ function checkHours(studentid, callback){
 
 			if (attendance.length) {
 				var totalTime = 0;
-				attendance.forEach(function(session){
+				attendance.forEach(function(session) {
 					if (session.out) {
 						totalTime += session.out - session.in;
 					}
@@ -148,12 +150,12 @@ function create(studentid, name, callback) {
 	});
 }
 
-function signIn(studentid, callback) {
+function signIn(studentId, callback) {
 	var d = new Date();
 	var time = d.getTime();
 
 	var query = {
-		student: studentid
+		student: studentId
 	};
 
 	async.parallel([
@@ -182,7 +184,7 @@ function signIn(studentid, callback) {
 					done(err);
 				} else {
 					db.attendance.insert({
-						student: studentid,
+						student: studentId,
 						name: doc.name,
 						in: time
 					}, function(err) {
@@ -204,12 +206,12 @@ function signIn(studentid, callback) {
 	});
 }
 
-function signOut(studentid, callback) {
+function signOut(studentId, callback) {
 	var d = new Date();
 	var time = d.getTime();
 
 	var query = {
-		student: studentid
+		student: studentId
 	};
 
 	async.parallel([
@@ -297,7 +299,7 @@ function killAll() {
 	};
 
 	db.attendance.find(query, function(err, docs) {
-		db.attendance.update(query, data, { multi: true }, function(err) {
+		db.attendance.update(query, data, {multi: true}, function(err) {
 			if (err) {
 				console.log(err);
 			}
