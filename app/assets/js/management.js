@@ -108,7 +108,7 @@ function checkState(studentid, callback) {
 function checkHours(studentid, callback){
 	var query = {
 		student: studentid
-	}
+	};
 
 	db.users.findOne(query, function(err, doc) {
 		if (err) {
@@ -148,12 +148,12 @@ function create(studentid, name, callback) {
 	});
 }
 
-function signIn(studentid, callback) {
+function signIn(studentId, callback) {
 	var d = new Date();
 	var time = d.getTime();
 
 	var query = {
-		student: studentid
+		student: studentId
 	};
 
 	async.parallel([
@@ -182,7 +182,7 @@ function signIn(studentid, callback) {
 					done(err);
 				} else {
 					db.attendance.insert({
-						student: studentid,
+						student: studentId,
 						name: doc.name,
 						in: time
 					}, function(err) {
@@ -204,12 +204,12 @@ function signIn(studentid, callback) {
 	});
 }
 
-function signOut(studentid, callback) {
+function signOut(studentId, callback) {
 	var d = new Date();
 	var time = d.getTime();
 
 	var query = {
-		student: studentid
+		student: studentId
 	};
 
 	async.parallel([
