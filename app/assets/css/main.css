@@ -1,86 +1,74 @@
-.title
-{
-	font: 900 70px/80px robotoThin, Helvetica, Arial, sans-serif;
-	letter-spacing: 2px;
-	margin: 10px 0;
+.title {
+    font: 900 70px/80px robotoThin, Helvetica, Arial, sans-serif;
+    letter-spacing: 2px;
+    margin: 10px 0;
 }
 
-.headline
-{
-	text-align: center;
-	padding: 12px 0 110px;
+.headline {
+    text-align: center;
+    padding: 12px 0 110px;
 }
 
-.title .logo
-{
-	background: url(../img/logo.png) center 0 no-repeat;
-	background-size: 125px 125px;
-	overflow: hidden;
-	text-indent: -9999em;
-	height: 125px;
-	width: 125px;
-	margin: 0 auto 26px;
+.title .logo {
+    background: url(../img/logo.png) center 0 no-repeat;
+    background-size: 125px 125px;
+    overflow: hidden;
+    text-indent: -9999em;
+    height: 125px;
+    width: 125px;
+    margin: 0 auto 26px;
 }
 
-.title small
-{
-	display: block;
-	color: #3498db;
-	font-size: 20px;
-	font-weight: 700;
-	letter-spacing: 0;
-	padding-top: 5px;
+.title small {
+    display: block;
+    color: #3498db;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0;
+    padding-top: 5px;
 }
 
-.container
-{
-	text-align: center;
+.container {
+    text-align: center;
 }
 
-.bottom-right
-{
-	position: absolute;
-	right: 10px;
-	bottom: 10px;
+.bottom-right {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
 }
 
-.column-left
-{
-	position: absolute;
-	left: 10px;
-	top: 30px;
-	width: 30%;
-	overflow-y: scroll;
+.column-left {
+    height: 100%;
+    position: absolute;
+    left: 10px;
+    top: 30px;
+    width: 30%;
+    overflow-y: scroll;
 }
 
-.column-right
-{
-	float: right;
-	width: 33%;
+.column-right {
+    float: right;
+    width: 33%;
 }
 
-.column-center
-{
-	position: absolute;
-	left: 33%;
-	top: 60%;
-	width: 33%;
+.column-center {
+    position: absolute;
+    left: 33%;
+    top: 60%;
+    width: 33%;
 }
 
-.sign-in
-{
-	margin-right: 5px;
+.sign-in {
+    margin-right: 5px;
 }
 
-.check-hours
-{
-	margin-left: 5px;
+.check-hours {
+    margin-left: 5px;
 }
 
-#student-id
-{
-	text-align: center;
-	color: #000;
-
-	margin-bottom: 15px;
+#student-id {
+    text-align: center;
+    color: #000;
+    margin-bottom: 15px;
 }

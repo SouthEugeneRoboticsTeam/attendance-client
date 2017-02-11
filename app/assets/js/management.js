@@ -14,7 +14,6 @@ var path = require('path');
 var db = {};
 
 function initAll(callback) {
-	console.log("begenning of search");
     db.options = new Datastore({
         filename: path.join(app.getPath('appData'), 'Attendance-Client', 'options', 'options.db'),
         autoload: true,
@@ -38,8 +37,7 @@ function initAll(callback) {
                         filename: path.join(app.getPath('appData'), 'Attendance-Client', 'seasons', season, 'attendance.db'),
                         autoload: true
                     });
-					callback();
-					
+                    callback();
                 }
             });
         }
@@ -74,15 +72,14 @@ function initAll(callback) {
             }
         }
     });
-	console.log(db.options)
 
-	db.options.findOne({
-	    option: 'killTime'
-	}, function(err, doc) {
-	    if (doc) {
-	        killTime = doc.value;
-	    }
-	});
+    db.options.findOne({
+        option: 'killTime'
+    }, function(err, doc) {
+        if (doc) {
+            killTime = doc.value;
+        }
+    });
 }
 var killTime = 0;
 
