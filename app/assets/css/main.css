@@ -46,8 +46,11 @@
 
 .column-left
 {
-	float: left;
-	width: 33%;
+	position: absolute;
+	left: 10px;
+	top: 30px;
+	width: 30%;
+	overflow-y: scroll;
 }
 
 .column-right
@@ -58,7 +61,9 @@
 
 .column-center
 {
-	display: inline-block;
+	position: absolute;
+	left: 33%;
+	top: 60%;
 	width: 33%;
 }
 
