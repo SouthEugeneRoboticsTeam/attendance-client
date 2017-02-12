@@ -42,7 +42,7 @@ initAll(function() {
                 var seconds = sec_num - (hours * 3600) - (minutes * 60);
 
                 var time = hours + ' hours and ' + minutes + ' minutes.';
-                var data = "<tr> <td>" + individualHours[i].name + "</td> <td>" + time + "</td> </tr>";
+                var data = "<tr> <td>" + parseInt(i + 1) + " - " + individualHours[i].name.split(" ")[0] + "</td> <td>" + time + "</td> </tr>";
 
                 $("#top-table-body").append(data);
             }
