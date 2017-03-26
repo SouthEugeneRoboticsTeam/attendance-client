@@ -131,9 +131,8 @@ $('#submit').click(function() {
 				swal({
 					type: 'warning',
 					title: 'Create Account',
-					text: 'Enter your full name.',
 					input: 'text',
-					html: '<input type=\'checkbox\' data-toggle=\'checkbox\' id=\'mentor-box\'>&nbsp;&nbsp;Mentor</input>',
+					html: '<p>We couldn\'t find a user with that id, \n Enter your information to make a new user.</p><input type=\'checkbox\' data-toggle=\'checkbox\' id=\'mentor-box\'>&nbsp;&nbsp;Mentor</input>',
 					showCancelButton: true,
 					inputValidator: function(value) {
 						return new Promise(function(resolve, reject) {
