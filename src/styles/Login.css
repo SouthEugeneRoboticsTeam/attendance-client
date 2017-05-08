@@ -1,0 +1,32 @@
+.Login {
+    position: absolute;
+    right: 0;
+
+    height: calc(100vh - 64px - 20px);
+    width: calc(60% - 15px);
+
+    padding: 10px;
+}
+
+.LoginBox {
+    position: absolute;
+    top: 62.5%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+
+    text-align: center;
+
+    height: 175px;
+    width: 85%;
+
+    padding: 10px;
+}
+
+.Logo {
+    position: absolute;
+    top: 22.5%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+
+    height: 25%;
+}

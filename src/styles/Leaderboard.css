@@ -1,0 +1,56 @@
+::-webkit-scrollbar {
+    /* For now, don't display a scrollbar. Remove this line if people get */
+    /* confused about the lack of scrollbar. */
+    display: none;
+
+    user-select: all;
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(171, 71, 188, 0.35) !important;
+}
+
+::-webkit-scrollbar-track {
+    background: lightgrey;
+}
+
+.Leaderboard {
+    position: absolute;
+    left: 0;
+
+    height: calc(100vh - 64px - 10px);
+    width: calc(40% - 15px);
+
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+
+    padding-left: 10px;
+    padding-right: 10px;
+
+    overflow: overlay;
+}
+
+.LeaderboardTable {
+    height: calc(100vh - 64px - 10px);
+    overflow: overlay;
+}
+
+.TableRow {
+    height: 75px !important;
+    overflow: overlay;
+}
+
+.RankColumn {
+    width: 20%;
+}
+
+.NameColumn {
+    width: auto;
+}
+
+.TimeColumn {
+    width: 30%;
+}
