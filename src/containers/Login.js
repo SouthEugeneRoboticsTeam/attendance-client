@@ -197,6 +197,7 @@ class Login extends Component {
                     <TextField
                         ref="studentId"
                         floatingLabelText="Student ID"
+                        type="number"
                         autoFocus={true}
                         value={this.state.studentId}
                         onChange={this.handleChange} />
