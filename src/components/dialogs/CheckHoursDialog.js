@@ -31,7 +31,7 @@ const renderTimeStats = (totals) => {
 
     return (
         <div>
-            <Table className="CheckHoursTable" selectable={false} showCheckboxes={false} style={{marginBottom: '25px'}}>
+            <Table className="CheckHoursTable" selectable={false} showCheckboxes={false}>
                 <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                     <TableRow>
                         <TableHeaderColumn className="SeasonColumn">Season</TableHeaderColumn>
@@ -42,7 +42,9 @@ const renderTimeStats = (totals) => {
                     {seasons}
                 </TableBody>
             </Table>
-            * Note that these are only your <i>official</i> hours, which update when you sign out.
+            <div style={{marginTop: '25px'}}>
+                * Note that these are only your <i>official</i> hours, which update when you sign out.
+            </div>
         </div>
     );
 }
