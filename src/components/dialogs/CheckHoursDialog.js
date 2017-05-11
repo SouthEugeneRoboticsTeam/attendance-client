@@ -48,7 +48,6 @@ const renderTimeStats = (totals) => {
 }
 
 const CheckHoursDialog = (props) => {
-    console.log(props)
     const actions = [
         <FlatButton
             label="Okay"

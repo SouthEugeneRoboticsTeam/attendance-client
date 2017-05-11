@@ -48,7 +48,6 @@ class Login extends Component {
     }
 
     checkExists(studentId = this.state.studentId) {
-        console.log(studentId)
         if (!this.props.users) return false;
 
         let users = JSON.parse(JSON.stringify(this.props.users));
@@ -108,7 +107,6 @@ class Login extends Component {
         const ref = this.props.firebase.ref;
 
         ref(`users/${studentId}/total`).once('value', (snap) => {
-            console.log(snap.val());
             this.setState({ userTimes: snap.val(), checkHoursDialogOpen: true });
         });
     }
