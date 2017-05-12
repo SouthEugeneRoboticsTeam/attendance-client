@@ -107,7 +107,7 @@ class Login extends Component {
         const ref = this.props.firebase.ref;
 
         ref(`users/${studentId}/total`).once('value', (snap) => {
-            this.setState({ userTimes: snap.val(), checkHoursDialogOpen: true });
+            this.setState({ studentId: '', userTimes: snap.val(), checkHoursDialogOpen: true });
         });
     }
 
