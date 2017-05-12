@@ -183,7 +183,7 @@ class Login extends Component {
                         ref="button"
                         label="Create Account"
                         disabled={!this.allowCreateAccount()}
-                        onClick={ () => this.setState({ button: 0, createAccountDialogOpen: true }) }
+                        onClick={ () => { this.allowCreateAccount() && this.setState({ button: 0, createAccountDialogOpen: true }) } }
                         primary={true} />
                 );
         }
