@@ -190,7 +190,7 @@ class Login extends Component {
 
         return (
             <div className="Login">
-                <img className="Logo" alt="logo" src="/images/logo.png" height={150} />
+                <img className="Logo" alt="logo" src={`${process.env.PUBLIC_URL}/images/logo.png`} height={150} />
                 <Paper className="LoginBox" zDepth={1} rounded={false}>
                     <TextField
                         ref="studentId"
