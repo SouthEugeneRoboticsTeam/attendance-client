@@ -36,7 +36,7 @@ class Leaderboard extends Component {
             users = JSON.parse(JSON.stringify(users));
 
             // If Firebase gives us an array, convert it to an object
-            if (users.constructor === Array) {
+            if (users && users.constructor === Array) {
                 users = users.reduce((acc, cur, i) => {
                     if (cur) acc[i] = cur;
                     return acc;

@@ -10,7 +10,7 @@ class LeaderboardTable extends Component {
     renderRows() {
         const { users } = this.props;
 
-        if (isLoaded(users)) {
+        if (users && isLoaded(users)) {
             const rows = [];
 
             // Sort the users from highest to lowest
@@ -30,7 +30,7 @@ class LeaderboardTable extends Component {
                         key={id}
                         name={users[id].name}
                         signedIn={users[id].signedIn}
-                        total={users[id].total[this.props.season]}
+                        total={users[id].total && users[id].total[this.props.season]}
                         rank={rank + 1} />
                 );
             });
