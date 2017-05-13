@@ -1,5 +1,5 @@
 {
-  "name": "electron-with-create-react-app",
+  "name": "attendance-client",
   "version": "0.0.1",
   "devDependencies": {
     "electron": "^1.4.14",
