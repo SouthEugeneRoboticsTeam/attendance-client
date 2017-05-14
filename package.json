@@ -5,11 +5,11 @@
     "electron": "^1.4.14",
     "enzyme": "^2.8.2",
     "foreman": "^2.0.0",
-    "react-scripts": "0.8.5"
+    "react-scripts": "0.9.5"
   },
   "dependencies": {
     "firebase": "^3.7.8",
-    "material-ui": "^0.17.3",
+    "material-ui": "^0.18.1",
     "prop-types": "^15.5.8",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
