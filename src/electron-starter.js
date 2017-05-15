@@ -13,7 +13,8 @@ function createWindow() {
         height: 600,
         minWidth: 655,
         minHeight: 500,
-        frame: false });
+        frame: false
+    });
 
     const startUrl = process.env.ELECTRON_START_URL || url.format({
         pathname: path.join(__dirname, '/../build/index.html'),
