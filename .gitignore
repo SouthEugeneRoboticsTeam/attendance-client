@@ -8,8 +8,7 @@ coverage
 
 # production
 build
-release
-Attendance-*
+dist
 
 # misc
 .DS_Store
