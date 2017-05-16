@@ -4,7 +4,7 @@
   "author": "Andrew Dassonville <dassonville.andrew@gmail.com>",
   "version": "0.0.1",
   "devDependencies": {
-    "electron": "^1.4.14",
+    "electron": "^1.6.8",
     "electron-builder": "^17.8.0",
     "enzyme": "^2.8.2",
     "foreman": "^2.0.0",
