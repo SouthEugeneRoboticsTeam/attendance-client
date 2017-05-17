@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import PropTypes from 'prop-types';
 
-import Leaderboard from '../containers/Leaderboard';
+import LeaderboardTable from '../components/LeaderboardTable';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -80,11 +80,11 @@ const dummyUsersArray = [
     }
 ];
 
-describe('<Leaderboard />', () => {
+describe('<LeaderboardTable />', () => {
 
     it('should correctly sort users given an object', () => {
         const wrapper = mount(
-            <Leaderboard season="2017test" users={dummyUsersObject} />,
+            <LeaderboardTable season="2017test" users={dummyUsersObject} />,
             {
                 context: { muiTheme: getMuiTheme() },
                 childContextTypes: { muiTheme: PropTypes.object }
@@ -104,7 +104,7 @@ describe('<Leaderboard />', () => {
 
     it('should correctly sort users given an array', () => {
         const wrapper = mount(
-            <Leaderboard season="2017test" users={dummyUsersArray} />,
+            <LeaderboardTable season="2017test" users={dummyUsersArray} />,
             {
                 context: { muiTheme: getMuiTheme() },
                 childContextTypes: { muiTheme: PropTypes.object }
@@ -124,7 +124,7 @@ describe('<Leaderboard />', () => {
 
     it('should correctly render with no users', () => {
         const wrapper = mount(
-            <Leaderboard season="2017test" users={[]} />,
+            <LeaderboardTable season="2017test" users={[]} />,
             {
                 context: { muiTheme: getMuiTheme() },
                 childContextTypes: { muiTheme: PropTypes.object }
