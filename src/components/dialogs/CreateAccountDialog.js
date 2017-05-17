@@ -22,8 +22,11 @@ class Leaderboard extends Component {
     }
 
     handleSubmit() {
-        this.props.handleSubmit(this.props.studentId, this.state.name, this.state.mentor);
-        this.setState({ name: '', mentor: false });
+        // Verify that the user has entered a name
+        if (this.state.name !== '') {
+            this.props.handleSubmit(this.props.studentId, this.state.name, this.state.mentor);
+            this.setState({ name: '', mentor: false });
+        }
     }
 
     render() {
