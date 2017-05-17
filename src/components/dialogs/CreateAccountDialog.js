@@ -11,7 +11,18 @@ class Leaderboard extends Component {
         this.state = { name: '', mentor: false };
     }
 
+    componentDidMount() {
+        window.addEventListener('keypress', this.handleKeyPress.bind(this));
+    }
+
+    handleKeyPress(event) {
+        if (event.key === 'Enter' && this.props.open) {
+            this.handleSubmit.bind(this)();
+        }
+    }
+
     handleSubmit() {
+        console.log('whoha')
         this.props.handleSubmit(this.props.studentId, this.state.name, this.state.mentor);
         this.setState({ name: '', mentor: false });
     }
@@ -25,8 +36,7 @@ class Leaderboard extends Component {
             <FlatButton
                 label="Okay"
                 primary={true}
-                onClick={this.handleSubmit.bind(this)}
-                autoFocus={true} />
+                onClick={this.handleSubmit.bind(this)} />
         ];
 
         return (
@@ -39,7 +49,9 @@ class Leaderboard extends Component {
                 <TextField
                     style={{ maxWidth: '250px' }}
                     value={this.state.name}
+                    ref="name"
                     onChange={ (e) => this.setState({ name: e.target.value }) }
+                    autoFocus={true}
                     hintText="Jane Doe"
                     floatingLabelText="Full Name" />
                 <Toggle
