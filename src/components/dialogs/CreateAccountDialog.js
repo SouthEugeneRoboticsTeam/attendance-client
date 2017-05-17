@@ -22,7 +22,6 @@ class Leaderboard extends Component {
     }
 
     handleSubmit() {
-        console.log('whoha')
         this.props.handleSubmit(this.props.studentId, this.state.name, this.state.mentor);
         this.setState({ name: '', mentor: false });
     }
