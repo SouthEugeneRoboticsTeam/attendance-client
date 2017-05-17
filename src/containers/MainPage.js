@@ -28,7 +28,8 @@ class MainPage extends Component {
                 <Leaderboard
                     users={this.props.users}
                     season={this.props.season}
-                    firebase={this.props.firebase} />
+                    firebase={this.props.firebase}
+                    settings={this.props.settings} />
                 <Login
                     users={this.props.users}
                     season={this.props.season}
@@ -39,10 +40,11 @@ class MainPage extends Component {
 }
 
 const wrappedMainPage = firebaseConnect([
-    'users', 'seasons/current'
+    'users', 'settings', 'seasons/current'
 ])(MainPage);
 
 export default connect(({ firebase }) => ({
     users: dataToJS(firebase, 'users'),
-    season: dataToJS(firebase, 'seasons/current')
+    season: dataToJS(firebase, 'seasons/current'),
+    settings: dataToJS(firebase, 'settings')
 }))(wrappedMainPage);

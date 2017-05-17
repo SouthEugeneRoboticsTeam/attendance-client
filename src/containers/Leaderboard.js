@@ -29,7 +29,8 @@ class Leaderboard extends Component {
     }
 
     renderTable() {
-        let { users } = this.props;
+        let { users, firebase } = this.props;
+        const ref = firebase.ref;
 
         if (isLoaded(users)) {
             // Duplicate the object w/o the reference
@@ -47,12 +48,32 @@ class Leaderboard extends Component {
             for (const key in users) {
                 if (!users.hasOwnProperty(key) || !users[key].signedIn) continue;
 
+                const currentTime = (new Date()).getTime() - users[key].lastSignedIn;
+
+                // Sign user out if they are signed in for too long
+                // TODO: Move this somewhere else
+                if (currentTime > this.props.settings.autoSignOut) {
+                    ref(`seasons/${this.props.season}/${key}/current`).once('value', snap => {
+                        const currentKey = snap.val();
+
+                        ref(`seasons/${this.props.season}/${key}/current`).set(null);
+                        ref(`users/${key}/signedIn`).set(false);
+                        ref(`users/${key}/lastSignedIn`).set(null);
+
+                        ref(`seasons/${this.props.season}/${key}/${currentKey}`).once('value', snap => {
+                            const { signIn } = snap.val();
+
+                            ref(`seasons/${this.props.season}/${key}/${currentKey}/signOut`).set(signIn);
+                        });
+                    });
+                }
+
                 if (!users[key].total) users[key].total = {};
 
                 if (users[key].total[this.props.season]) {
-                    users[key].total[this.props.season] += (new Date()).getTime() - users[key].lastSignedIn;
+                    users[key].total[this.props.season] += currentTime;
                 } else {
-                    users[key].total[this.props.season] = (new Date()).getTime() - users[key].lastSignedIn;
+                    users[key].total[this.props.season] = currentTime;
                 }
             }
         }
