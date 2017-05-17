@@ -18,10 +18,10 @@ class LeaderboardTable extends Component {
                 if (!users[a].total) users[a].total = {};
                 if (!users[b].total) users[b].total = {};
 
-                const val1 = users[a].total[this.props.season] || 0;
-                const val2 = users[b].total[this.props.season] || 0;
+                const aVal = users[a].total[this.props.season] || 0;
+                const bVal = users[b].total[this.props.season] || 0;
 
-                return val1 < val2;
+                return bVal - aVal;
             });
 
             sorted.forEach((id, rank) => {
