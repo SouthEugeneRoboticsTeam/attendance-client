@@ -52,7 +52,7 @@ class Leaderboard extends Component {
 
                 // Sign user out if they are signed in for too long
                 // TODO: Move this somewhere else
-                if (currentTime > this.props.settings.autoSignOut) {
+                if (this.props.settings && currentTime > this.props.settings.autoSignOut) {
                     ref(`seasons/${this.props.season}/${key}/current`).once('value', snap => {
                         const currentKey = snap.val();
 
