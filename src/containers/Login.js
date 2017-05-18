@@ -5,6 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 import '../styles/Login.css';
 
+import ConnectionDialog from '../components/dialogs/ConnectionDialog';
 import SignInDialog from '../components/dialogs/SignInDialog';
 import SignOutDialog from '../components/dialogs/SignOutDialog';
 import CheckHoursDialog from '../components/dialogs/CheckHoursDialog';
@@ -15,6 +16,8 @@ class Login extends Component {
         super(props);
 
         this.state = {
+            connected: true,
+
             studentId: '',
             button: 0,
 
@@ -35,12 +38,19 @@ class Login extends Component {
     }
 
     componentDidMount() {
+        const ref = this.props.firebase.ref;
+
+        ref('.info/connected').on('value', (snap) => {
+            this.setState({ connected: snap.val() });
+        });
+
         window.addEventListener('keypress', this.handleKeyPress.bind(this));
     }
 
     componentDidUpdate() {
         // Keep Student ID input focus
-        if (!this.state.createAccountDialogOpen
+        if (this.state.connected
+            && !this.state.createAccountDialogOpen
             && !this.state.signInDialogOpen
             && !this.state.signOutDialogOpen) {
             this.refs.studentId.focus();
@@ -149,6 +159,7 @@ class Login extends Component {
 
     handleKeyPress(event) {
         if (event.key === 'Enter'
+            && this.state.connected
             && !this.state.createAccountDialogOpen
             && !this.state.signInDialogOpen
             && !this.state.signOutDialogOpen) {
@@ -209,6 +220,7 @@ class Login extends Component {
                         style={{ marginLeft: '20px' }}/>
                 </Paper>
 
+                <ConnectionDialog open={!this.state.connected} />
                 <SignInDialog
                     open={this.state.signInDialogOpen}
                     handleClose={ () => { this.setState({ signInDialogOpen: false }) }} />
