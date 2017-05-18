@@ -22,7 +22,6 @@ function createWindow() {
         slashes: true
     });
     mainWindow.loadURL(startUrl);
-    mainWindow.webContents.openDevTools();
 
     mainWindow.setMenu(null);
 
