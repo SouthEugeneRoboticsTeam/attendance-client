@@ -1,5 +1,6 @@
 {
   "name": "attendance-client",
+  "productName": "Attendance Client",
   "description": "An app for managing attendance",
   "author": "Andrew Dassonville <dassonville.andrew@gmail.com>",
   "version": "0.1.0",
