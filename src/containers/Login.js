@@ -126,8 +126,11 @@ class Login extends Component {
 
         studentId = parseInt(studentId, 10);
 
-        ref(`users/${studentId}/name`).set(name);
-        ref(`users/${studentId}/mentor`).set(mentor);
+        ref().child('users').child(studentId).set({
+            name,
+            mentor,
+            signedIn: false,
+        });
 
         this.signIn(studentId);
         this.setState({ createAccountDialogOpen: false })
