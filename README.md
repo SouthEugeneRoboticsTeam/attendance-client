@@ -37,7 +37,7 @@ $ npm run release:linux        # Release for Linux
 
 <!-- Badge URLs -->
 
-[release-img]: https://img.shields.io/github/release/SouthEugeneRoboticsTeam/Attendance-Client.svg?style=flat-square
-[release-url]: https://github.com/SouthEugeneRoboticsTeam/Attendance-Client/releases
-[travis-img]:  https://img.shields.io/travis/SouthEugeneRoboticsTeam/Attendance-Client.svg?style=flat-square
-[travis-url]:  https://travis-ci.org/SouthEugeneRoboticsTeam/Attendance-Client
+[release-img]: https://img.shields.io/github/release/SouthEugeneRoboticsTeam/attendance-client.svg?style=flat-square
+[release-url]: https://github.com/SouthEugeneRoboticsTeam/attendance-client/releases
+[travis-img]:  https://img.shields.io/travis/SouthEugeneRoboticsTeam/attendance-client.svg?style=flat-square
+[travis-url]:  https://travis-ci.org/SouthEugeneRoboticsTeam/attendance-client
