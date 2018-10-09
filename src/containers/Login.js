@@ -237,7 +237,7 @@ class Login extends Component {
                 <CreateAccountDialog
                     open={this.state.createAccountDialogOpen}
                     handleSubmit={this.createAccount}
-                    handleClose={ () => { this.setState({ createAccountDialogOpen: false }) }}
+                    handleClose={ () => { this.setState({ createAccountDialogOpen: false, studentId: '' }) }}
                     studentId={this.state.studentId} />
             </div>
         );
