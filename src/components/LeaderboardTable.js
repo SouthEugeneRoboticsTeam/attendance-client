@@ -7,6 +7,11 @@ import '../styles/Leaderboard.css';
 import LeaderboardRow from './LeaderboardRow';
 
 class LeaderboardTable extends Component {
+
+    sortBy(o, key) {
+
+    }
+
     renderRows() {
         const { users } = this.props;
 
@@ -14,19 +19,11 @@ class LeaderboardTable extends Component {
             const rows = [];
 
             // Sort the users from highest to lowest
-            const sorted = Object.keys(users).sort((a, b) => {
-                if (!users[a].total) users[a].total = {};
-                if (!users[b].total) users[b].total = {};
+            const sortedAndFiltered = Object.keys(users).sort((a, b) => {
+                return users[a]['name'].localeCompare(users[b]['name'])
+            }).filter(name => users[name].signedIn);
 
-                const aVal = users[a].total[this.props.season] || 0;
-                const bVal = users[b].total[this.props.season] || 0;
-
-                return bVal - aVal;
-            });
-
-            const filtered = sorted.filter(name => users[name].signedIn);
-
-            filtered.forEach((id, rank) => {
+            sortedAndFiltered.forEach((id, rank) => {
                 rows.push(
                     <LeaderboardRow
                         key={id}
