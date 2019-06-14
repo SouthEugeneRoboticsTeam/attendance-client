@@ -24,7 +24,9 @@ class LeaderboardTable extends Component {
                 return bVal - aVal;
             });
 
-            sorted.forEach((id, rank) => {
+            const filtered = sorted.filter(name => users[name].signedIn);
+
+            filtered.forEach((id, rank) => {
                 rows.push(
                     <LeaderboardRow
                         key={id}
@@ -46,9 +48,7 @@ class LeaderboardTable extends Component {
             <Table className="LeaderboardTable" selectable={false} showCheckboxes={false} height={"calc(100vh - 64px - 80px)"}>
                 <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                     <TableRow>
-                        <TableHeaderColumn className="RankColumn">Rank</TableHeaderColumn>
-                        <TableHeaderColumn className="NameColumn">Name</TableHeaderColumn>
-                        <TableHeaderColumn className="TimeColumn">Hours</TableHeaderColumn>
+                        <TableHeaderColumn className="SignedInColumn">Signed In</TableHeaderColumn>
                     </TableRow>
                 </TableHeader>
                 <TableBody displayRowCheckbox={false}>
@@ -57,6 +57,6 @@ class LeaderboardTable extends Component {
             </Table>
         );
     }
-};
+}
 
 export default LeaderboardTable;
