@@ -14,6 +14,11 @@ input::-webkit-inner-spin-button {
     padding: 10px;
 }
 
+.temp {
+
+    top: 80%;
+}
+
 .LoginBox {
     position: absolute;
     top: 62.5%;

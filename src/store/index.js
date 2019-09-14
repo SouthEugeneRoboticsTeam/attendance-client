@@ -1,5 +1,6 @@
-import { createStore, compose } from 'redux';
-import { reactReduxFirebase } from 'react-redux-firebase';
+import { createStore, combineReducers, compose } from 'redux'
+import { reactReduxFirebase, firebaseReducer } from 'react-redux-firebase'
+import firebase from 'firebase'
 
 import reducers from '../reducers';
 
@@ -12,8 +13,24 @@ const config = {
     messagingSenderId: '254932967706'
 };
 
-const createStoreWithFirebase = compose(
-    reactReduxFirebase(config, { userProfile: 'users' }),
-)(createStore);
+firebase.initializeApp(config);
 
-export default createStoreWithFirebase(reducers);
+const rootReducer = combineReducers({
+    firebase: firebaseReducer,
+    // firestore: firestoreReducer // <- needed if using firestore
+})
+
+const store = createStore(
+    rootReducer,
+    {},
+    compose(
+        reactReduxFirebase(firebase, { userProfile: 'users' }), // pass in firebase instance instead of config
+    )
+)
+
+// const createStoreWithFirebase = compose(
+//     reactReduxFirebase(config, { userProfile: 'users' }),
+// )(createStore);
+
+export default store
+// export default createStoreWithFirebase(reducers);

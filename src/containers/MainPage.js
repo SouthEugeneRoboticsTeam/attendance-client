@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import {
     firebaseConnect,
-    dataToJS,
     isLoaded,
-    isEmpty
+    isEmpty,
+    getVal
 } from 'react-redux-firebase'
 
 import '../styles/MainPage.css';
 
 import TitleBar from '../components/TitleBar';
 import Leaderboard from './Leaderboard';
+import ProgressBar from './ProgressBar'
 import Login from './Login';
 
 class MainPage extends Component {
@@ -30,6 +31,8 @@ class MainPage extends Component {
                     season={this.props.season}
                     firebase={this.props.firebase}
                     settings={this.props.settings} />
+                <ProgressBar />
+
                 <Login
                     users={this.props.users}
                     season={this.props.season}
@@ -44,7 +47,7 @@ const wrappedMainPage = firebaseConnect([
 ])(MainPage);
 
 export default connect(({ firebase }) => ({
-    users: dataToJS(firebase, 'users'),
-    season: dataToJS(firebase, 'seasons/current'),
-    settings: dataToJS(firebase, 'settings')
+    users: getVal(firebase, 'users'),
+    season: getVal(firebase, 'seasons/current'),
+    settings: getVal(firebase, 'settings')
 }))(wrappedMainPage);

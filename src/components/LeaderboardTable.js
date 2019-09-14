@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { isLoaded } from 'react-redux-firebase';
-import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow } from 'material-ui/Table';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+
 
 import '../styles/Leaderboard.css';
 
@@ -44,13 +49,13 @@ class LeaderboardTable extends Component {
     render() {
         return (
             <Table className="LeaderboardTable" selectable={false} showCheckboxes={false} height={"calc(100vh - 64px - 80px)"}>
-                <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+                <TableHead displaySelectAll={false} adjustForCheckbox={false}>
                     <TableRow>
-                        <TableHeaderColumn className="RankColumn">Rank</TableHeaderColumn>
-                        <TableHeaderColumn className="NameColumn">Name</TableHeaderColumn>
-                        <TableHeaderColumn className="TimeColumn">Hours</TableHeaderColumn>
+                        <TableCell className="RankColumn">Rank</TableCell>
+                        <TableCell className="NameColumn">Name</TableCell>
+                        <TableCell className="TimeColumn">Hours</TableCell>
                     </TableRow>
-                </TableHeader>
+                </TableHead>
                 <TableBody displayRowCheckbox={false}>
                     {this.renderRows.bind(this)()}
                 </TableBody>

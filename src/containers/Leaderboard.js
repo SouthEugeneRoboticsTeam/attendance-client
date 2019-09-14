@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { isLoaded } from 'react-redux-firebase';
-import Paper from 'material-ui/Paper';
-
+import Paper from '@material-ui/core/Paper';
 import '../styles/Leaderboard.css';
 
 import LeaderboardTable from '../components/LeaderboardTable';

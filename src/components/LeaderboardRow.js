@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { TableRow, TableRowColumn } from 'material-ui/Table';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
 
 import formatTime from '../utils/formatTime';
 
@@ -10,9 +11,9 @@ class LeaderboardRow extends Component {
         if (this.props.total) {
             return (
                 <TableRow className="TableRow" striped={!!(this.props.rank % 2)} key={this.props.rank}>
-                    <TableRowColumn className="RankColumn">{this.props.rank}{this.props.signedIn && '*'}</TableRowColumn>
-                    <TableRowColumn className="NameColumn">{this.props.name}</TableRowColumn>
-                    <TableRowColumn className="TimeColumn">{formatTime(this.props.total)}</TableRowColumn>
+                    <TableCell className="RankColumn">{this.props.rank}{this.props.signedIn && '*'}</TableCell>
+                    <TableCell className="NameColumn">{this.props.name}</TableCell>
+                    <TableCell className="TimeColumn">{formatTime(this.props.total)}</TableCell>
                 </TableRow>
             );
         } else {
