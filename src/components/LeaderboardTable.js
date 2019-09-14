@@ -48,15 +48,15 @@ class LeaderboardTable extends Component {
 
     render() {
         return (
-            <Table className="LeaderboardTable" selectable={false} showCheckboxes={false} height={"calc(100vh - 64px - 80px)"}>
-                <TableHead displaySelectAll={false} adjustForCheckbox={false}>
+            <Table className="LeaderboardTable" height={"calc(100vh - 64px - 80px)"}>
+                <TableHead>
                     <TableRow>
                         <TableCell className="RankColumn">Rank</TableCell>
                         <TableCell className="NameColumn">Name</TableCell>
                         <TableCell className="TimeColumn">Hours</TableCell>
                     </TableRow>
                 </TableHead>
-                <TableBody displayRowCheckbox={false}>
+                <TableBody>
                     {this.renderRows.bind(this)()}
                 </TableBody>
             </Table>

@@ -15,22 +15,16 @@ const config = {
 
 firebase.initializeApp(config);
 
-const rootReducer = combineReducers({
-    firebase: firebaseReducer,
-    // firestore: firestoreReducer // <- needed if using firestore
-})
-
 const store = createStore(
-    rootReducer,
+    reducers,
     {},
     compose(
-        reactReduxFirebase(firebase, { userProfile: 'users' }), // pass in firebase instance instead of config
+        reactReduxFirebase(firebase, { userProfile: 'users' }),
     )
 )
 
+export default store
 // const createStoreWithFirebase = compose(
 //     reactReduxFirebase(config, { userProfile: 'users' }),
 // )(createStore);
-
-export default store
 // export default createStoreWithFirebase(reducers);
