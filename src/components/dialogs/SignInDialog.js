@@ -1,14 +1,14 @@
 import React from 'react';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
+import Dialog from '@material-ui/core/Dialog'
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button'
+
 
 const SignInDialog = (props) => {
     const actions = [
-        <FlatButton
-            label="Okay"
-            primary={true}
-            onClick={props.handleClose}
-            autoFocus={true} />
+        <Button variant="outlined" color="primary" onClick={props.handleClose} autoFocus={true}>
+            Okay
+        </Button>
     ];
 
     // Close dialog after 2 seconds
@@ -17,13 +17,12 @@ const SignInDialog = (props) => {
     }
 
     return (
-        <Dialog
-            title="Signed In"
-            actions={actions}
-            modal={false}
-            open={props.open}
-            onRequestClose={props.handleClose}>
+        <Dialog open={props.open} onRequestClose={props.handleClose}>
+            <DialogTitle>
+                Signed In
+            </DialogTitle>
             You have been successfully signed in!
+            {actions}
         </Dialog>
     );
 };

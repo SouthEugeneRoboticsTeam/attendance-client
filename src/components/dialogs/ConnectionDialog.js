@@ -1,14 +1,17 @@
 import React from 'react';
-import Dialog from 'material-ui/Dialog';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 
 const ConnectionDialog = (props) => {
     return (
-        <Dialog
-            title="Lost Connection"
-            modal={true}
-            open={props.open}>
+        <Dialog open={props.open}>
+            <DialogTitle>
+                Lost Connection
+            </DialogTitle>
             You must reconnect to the internet before continuing.
         </Dialog>
+
     );
 };
 

@@ -14,7 +14,7 @@ const config = {
 };
 
 firebase.initializeApp(config);
-
+console.log("FIREBASE STARTED")
 const store = createStore(
     reducers,
     {},

@@ -5,18 +5,15 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { purple } from '@material-ui/core/colors';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import MainPage from './MainPage';
 
 import store from '../store';
 
-const muiTheme = createMuiTheme({
+const theme = createMuiTheme({
     palette: {
-        primary: {
-            main: purple[500]
-        },
-    },
+        primary: purple
+    }
 });
 
 // injectTapEventPlugin();
@@ -28,11 +25,9 @@ const muiTheme = createMuiTheme({
 class App extends Component {
     render() {
         return (
-            <MuiThemeProvider theme={muiTheme}>
-                <Provider store={store}>
-                    <MainPage />
-                </Provider>
-            </MuiThemeProvider>
+            <Provider store={store}>
+                <MainPage />
+            </Provider>
         );
     }
 }

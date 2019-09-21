@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import Paper from 'material-ui/Paper';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-
+import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import '../styles/Login.css';
 
 import ConnectionDialog from '../components/dialogs/ConnectionDialog';
@@ -175,52 +174,42 @@ class Login extends Component {
         switch(this.state.button) {
             case 1:
                 button = (
-                    <RaisedButton
-                        ref="button"
-                        label="Sign In"
-                        onClick={ () => this.signIn() }
-                        primary={true} />
+                    <Button ref="button" onClick={ () => this.signIn() } primary={true}>
+                        Sign In
+                    </Button>
                 );
                 break;
             case 2:
                 button = (
-                    <RaisedButton
-                        ref="button"
-                        label="Sign Out"
-                        onClick={ () => this.signOut() }
-                        primary={true} />
+                    <Button ref="button" onClick={ () => this.signOut() } primary={true}>
+                        Sign Out
+                    </Button>
                 )
                 break;
             default:
                 button = (
-                    <RaisedButton
-                        ref="button"
-                        label="Create Account"
-                        disabled={!this.allowCreateAccount()}
-                        onClick={ () => { this.allowCreateAccount() && this.setState({ button: 0, createAccountDialogOpen: true }) } }
-                        primary={true} />
+                    <Button ref="button" variant="contained" color="primary" disabled={!this.allowCreateAccount()} onClick={ () => { this.allowCreateAccount() && this.setState({ button: 0, createAccountDialogOpen: true }) } } primary={true}>
+                        Create Account
+                    </Button>
                 );
         }
 
         return (
             <div className="Login">
                 <img className="Logo" alt="logo" src={`${process.env.PUBLIC_URL}/images/logo.svg`} height={150} />
-                <Paper className="LoginBox" zDepth={1} rounded={false}>
+                <Paper className="LoginBox">
                     <TextField
                         ref="studentId"
-                        floatingLabelText="Student ID"
+                        label="Student ID"
                         type="number"
                         autoFocus={true}
                         value={this.state.studentId}
                         onChange={this.handleChange} />
                     <br />
                     {button}
-                    <RaisedButton
-                        label="Check Hours"
-                        disabled={!this.checkExists()}
-                        onClick={ () => this.checkHours() }
-                        secondary={true}
-                        style={{ marginLeft: '20px' }}/>
+                    <Button disabled={!this.checkExists()} onClick={ () => this.checkHours() } secondary={true} style={{ marginLeft: '20px' }}>
+                        Check Hours
+                    </Button>
                 </Paper>
 
                 <ConnectionDialog open={!this.state.connected} />

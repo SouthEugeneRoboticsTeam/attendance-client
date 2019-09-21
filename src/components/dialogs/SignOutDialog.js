@@ -1,14 +1,14 @@
 import React from 'react';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
+import Dialog from '@material-ui/core/Dialog'
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button'
+
 
 const SignOutDialog = (props) => {
     const actions = [
-        <FlatButton
-            label="Okay"
-            primary={true}
-            onClick={props.handleClose}
-            autoFocus={true} />
+        <Button colors="primary" variant="outlined" onClick={props.handleClose}>
+            Okay
+        </Button>
     ];
 
     // Close dialog after 2 seconds
@@ -17,13 +17,12 @@ const SignOutDialog = (props) => {
     }
 
     return (
-        <Dialog
-            title="Signed Out"
-            actions={actions}
-            modal={false}
-            open={props.open}
-            onRequestClose={props.handleClose}>
+        <Dialog open={props.open} onRequestClose={props.handleClose}>
+            <DialogTitle>
+                Signed Out
+            </DialogTitle>
             You have been successfully signed out!
+            {actions}
         </Dialog>
     );
 };

@@ -1,7 +1,13 @@
 import React from 'react';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
-import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
+import Dialog from '@material-ui/core/Dialog'
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+
 
 import formatTime from '../../utils/formatTime';
 
@@ -14,8 +20,8 @@ const renderTimeStats = (totals) => {
 
         seasons.push(
             <TableRow className="TableRow" striped={false} key={season}>
-                <TableRowColumn className="SeasonColumn">{season}</TableRowColumn>
-                <TableRowColumn className="TimeColumn">{formatTime(totals[season])}</TableRowColumn>
+                <TableCell className="SeasonColumn">{season}</TableCell>
+                <TableCell className="TimeColumn">{formatTime(totals[season])}</TableCell>
             </TableRow>
         );
 
@@ -24,21 +30,21 @@ const renderTimeStats = (totals) => {
 
     seasons.push(
         <TableRow className="TableRow" hovered={true} key="total">
-            <TableRowColumn className="SeasonColumn"><b>TOTAL</b></TableRowColumn>
-            <TableRowColumn className="TimeColumn">{formatTime(total)}</TableRowColumn>
+            <TableCell className="SeasonColumn"><b>TOTAL</b></TableCell>
+            <TableCell className="TimeColumn">{formatTime(total)}</TableCell>
         </TableRow>
     );
 
     return (
         <div>
-            <Table className="CheckHoursTable" selectable={false} showCheckboxes={false}>
-                <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+            <Table className="CheckHoursTable">
+                <TableHead>
                     <TableRow>
-                        <TableHeaderColumn className="SeasonColumn">Season</TableHeaderColumn>
-                        <TableHeaderColumn className="TimeColumn">Hours</TableHeaderColumn>
+                        <TableCell className="SeasonColumn">Season</TableCell>
+                        <TableCell className="TimeColumn">Hours</TableCell>
                     </TableRow>
-                </TableHeader>
-                <TableBody displayRowCheckbox={false}>
+                </TableHead>
+                <TableBody>
                     {seasons}
                 </TableBody>
             </Table>
@@ -51,20 +57,16 @@ const renderTimeStats = (totals) => {
 
 const CheckHoursDialog = (props) => {
     const actions = [
-        <FlatButton
-            label="Okay"
-            primary={true}
-            onClick={props.handleClose}
-            autoFocus={true} />
+        <Button onClick={props.handleClose}>
+            Okay
+        </Button>
     ];
 
     return (
-        <Dialog
-            title="Time Statistics"
-            actions={actions}
-            modal={false}
-            open={props.open}
-            onRequestClose={props.handleClose}>
+        <Dialog actions={actions} open={props.open} onRequestClose={props.handleClose}>
+            <DialogTitle>
+                Time Statistics
+            </DialogTitle>
             {renderTimeStats(props.totals)}
         </Dialog>
     );
