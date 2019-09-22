@@ -30,17 +30,19 @@
     padding-left: 10px;
     padding-right: 10px;
 
-    overflow: overlay;
+    overflow: inherit;
 }
 
 .LeaderboardTable {
     height: calc(100vh - 64px - 10px);
-    overflow: overlay;
+    /*overflow: overlay;*/
 }
 
 .TableRow {
-    height: 75px !important;
-    overflow: overlay;
+    display: table;
+    height: 100px;
+    width: 100%
+    /*overflow: overlay;*/
 }
 
 .RankColumn {
@@ -48,9 +50,12 @@
 }
 
 .NameColumn {
-    width: auto;
+    width: 100%;
 }
 
 .TimeColumn {
     width: 30%;
+}
+
+.SignedInColumn {
 }

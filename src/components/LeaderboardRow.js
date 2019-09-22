@@ -7,8 +7,13 @@ class LeaderboardRow extends Component {
     render() {
         if (this.props.total) {
             return (
-                <TableRow className="TableRow" striped={!!(this.props.rank % 2)} key={this.props.rank}>
-                    <TableRowColumn className="SignedInColumn">{this.props.name}</TableRowColumn>
+                <TableRow
+                    className="TableRow"
+                    striped={!!(this.props.rank % 2)}
+                    key={this.props.rank}>
+                    <TableRowColumn
+                        className="SignedInColumn">
+                        {this.props.name}</TableRowColumn>
                 </TableRow>
             );
         } else {
