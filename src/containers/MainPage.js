@@ -40,7 +40,7 @@ class MainPage extends Component {
 }
 
 const wrappedMainPage = firebaseConnect([
-    'users', 'settings', 'seasons/current'
+    'users', 'settings', 'seasons'
 ])(MainPage);
 
 export default connect(({ firebase }) => ({

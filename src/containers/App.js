@@ -19,7 +19,7 @@ const muiTheme = getMuiTheme({
 injectTapEventPlugin();
 
 firebase.initializeApp({
-    databaseURL: 'https://attendance-4b31e.firebaseio.com'
+    databaseURL: 'https://attendance-2fd4c.firebaseio.com/'
 });
 
 class App extends Component {

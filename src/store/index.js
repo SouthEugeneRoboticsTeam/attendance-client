@@ -4,12 +4,14 @@ import { reactReduxFirebase } from 'react-redux-firebase';
 import reducers from '../reducers';
 
 const config = {
-    apiKey: 'AIzaSyDnO_-9YCmjwNPovOoC8cvhEEng-yqPNn8',
-    authDomain: 'attendance-4b31e.firebaseapp.com',
-    databaseURL: 'https://attendance-4b31e.firebaseio.com',
-    projectId: 'attendance-4b31e',
-    storageBucket: 'attendance-4b31e.appspot.com',
-    messagingSenderId: '254932967706'
+    apiKey: "AIzaSyDznDAz5tbIaTBvY-wYjRMbg3nCtrLxDYM",
+    authDomain: "attendance-2fd4c.firebaseapp.com",
+    databaseURL: "https://attendance-2fd4c.firebaseio.com",
+    projectId: "attendance-2fd4c",
+    storageBucket: "attendance-2fd4c.appspot.com",
+    messagingSenderId: "786876917018",
+    appId: "1:786876917018:web:99dfcdd2dace26caf378a3",
+    measurementId: "G-Y6C17GSNJ6"
 };
 
 const createStoreWithFirebase = compose(
