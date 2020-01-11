@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { isLoaded } from 'react-redux-firebase';
+import React, {Component} from 'react';
+import {isLoaded} from 'react-redux-firebase';
 import Paper from 'material-ui/Paper';
 
 import '../styles/Leaderboard.css';
@@ -10,7 +10,7 @@ class Leaderboard extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { heartbeat: (new Date()).getTime() };
+        this.state = {heartbeat: (new Date()).getTime()};
 
         this.heartbeat = this.heartbeat.bind(this);
     }
@@ -25,11 +25,11 @@ class Leaderboard extends Component {
     }
 
     heartbeat() {
-        this.setState({ heartbeat: (new Date()).getTime() });
+        this.setState({heartbeat: (new Date()).getTime()});
     }
 
     renderTable() {
-        let { users, firebase } = this.props;
+        let {users, firebase} = this.props;
         const ref = firebase.ref;
 
         if (isLoaded(users)) {
@@ -53,7 +53,7 @@ class Leaderboard extends Component {
                 // Sign user out if they are signed in for too long
                 // TODO: Move this somewhere else
                 if (this.props.settings && currentTime > this.props.settings.autoSignOut) {
-                    ref(`seasons/${this.props.season}/${key}/current`).once('value', snap => {
+                    ref(`seasons/${this.props.season}/${key}`).once('value', snap => {
                         const currentKey = snap.val();
 
                         ref(`seasons/${this.props.season}/${key}/current`).set(null);
@@ -61,7 +61,7 @@ class Leaderboard extends Component {
                         ref(`users/${key}/lastSignedIn`).set(null);
 
                         ref(`seasons/${this.props.season}/${key}/${currentKey}`).once('value', snap => {
-                            const { signIn } = snap.val();
+                            const {signIn} = snap.val();
 
                             ref(`seasons/${this.props.season}/${key}/${currentKey}/signOut`).set(signIn);
                         });
@@ -78,7 +78,7 @@ class Leaderboard extends Component {
             }
         }
 
-        return <LeaderboardTable season={this.props.season} users={users} />;
+        return <LeaderboardTable season={this.props.season} users={users}/>;
     }
 
     render() {
