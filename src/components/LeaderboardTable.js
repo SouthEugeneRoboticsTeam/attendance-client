@@ -16,9 +16,11 @@ class LeaderboardTable extends Component {
 
         if (users && isLoaded(users)) {
             const rows = [];
-
             // Sort the users from highest to lowest
-            const sortedAndFiltered = Object.keys(users).filter(name => users[name].signedIn);
+            const sortedAndFiltered = Object.keys(users).sort((a, b) => {
+                return users[a]['name'].localeCompare(users[b]['name'])
+            }).filter(name => users[name].signedIn);
+
 
             sortedAndFiltered.forEach((id, rank) => {
                 rows.push(
