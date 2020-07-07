@@ -6,7 +6,7 @@
   "version": "0.1.0",
   "license": "GPLv3",
   "devDependencies": {
-    "electron": "^1.6.8",
+    "electron": "^9.1.0",
     "electron-builder": "^17.8.0",
     "enzyme": "^2.9.1",
     "foreman": "^2.0.0",
